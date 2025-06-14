@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>📋 Panel de Postulantes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Panel de Postulantes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Experiencia en atención al público</th>
+                    <th>Experiencia en producción</th>
+                    <th>Currículum</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for postulante in postulantes %}
+                <tr>
+                    <td>{{ postulante[0] }}</td>
+                    <td>{{ postulante[1] }}</td>
+                    <td>{{ postulante[2] }}</td>
+                    <td class="{{ 'yes' if postulante[3] == 1 else 'no' }}">
+                        {{ 'Sí' if postulante[3] == 1 else 'No' }}
+                    </td>
+                    <td class="{{ 'yes' if postulante[4] == 1 else 'no' }}">
+                        {{ 'Sí' if postulante[4] == 1 else 'No' }}
+                    </td>
+                    <td>
+                        {% if postulante[5] %}
+                            <a class="btn" href="{{ url_for('admin.ver_cv', nombre_archivo=postulante[5]) }}" target="_blank">Ver CV</a>
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No hay postulantes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
