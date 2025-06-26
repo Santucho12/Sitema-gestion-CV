@@ -7,4 +7,5 @@ def get_db_connection():
         user=Config.DB_USER,
         password=Config.DB_PASSWORD,
         database=Config.DB_NAME
+
     )
