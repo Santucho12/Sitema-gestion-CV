@@ -1,3 +1,18 @@
+th:nth-child(3), td:nth-child(3) { /* nombre */
+  min-width: 180px;
+  max-width: 300px;
+  width: 220px;
+}
+th:nth-child(4), td:nth-child(4) { /* apellido */
+  min-width: 180px;
+  max-width: 300px;
+  width: 220px;
+}
+th:nth-child(7), td:nth-child(7) { /* dirección */
+  min-width: 220px;
+  max-width: 350px;
+  width: 260px;
+}
 .scrollable-cell {
   max-height: 70px;
   overflow-y: auto;
@@ -188,6 +203,10 @@ td {
   border-bottom: 1px solid var(--border-color);
 }
 
+th.id-col,
+td.id-col {
+  display: none;
+}
 /* Filas de la tabla */
 tbody tr {
   transition: all 0.2s ease;
@@ -208,6 +227,11 @@ tbody tr:nth-child(even) {
   background-color: #F3EAD2;
 }
 
+th:nth-child(14), td:nth-child(14) {
+  min-width: 320px;
+  max-width: 500px;
+  width: 400px;
+}
 tbody tr:nth-child(even):hover {
   background-color: rgb(208, 206, 206);
 }
