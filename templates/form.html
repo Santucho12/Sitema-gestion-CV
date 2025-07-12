@@ -30,11 +30,11 @@
             <!-- Datos personales (Postulantes) -->
             <div class="form-group">
                 <label for="nombre">Nombre <span style="color:red">*</span></label>
-                <input type="text" id="nombre" name="nombre" maxlength="100" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="Solo letras y espacios" />
+                <input type="text" id="nombre" name="nombre" maxlength="100" required pattern="^[A-Za-z\s]+$" title="Solo letras (sin acentos) y espacios" />
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido <span style="color:red">*</span></label>
-                <input type="text" id="apellido" name="apellido" maxlength="100" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="Solo letras y espacios" />
+                <input type="text" id="apellido" name="apellido" maxlength="100" required pattern="^[A-Za-z\s]+$" title="Solo letras (sin acentos) y espacios" />
             </div>
             <div class="form-group">
                 <label for="sexo">Sexo <span style="color:red">*</span></label>
@@ -196,15 +196,15 @@
             const nombre = document.getElementById('nombre');
             const apellido = document.getElementById('apellido');
             const direccion = document.getElementById('direccion');
-            // Solo letras y espacios
-            const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            // Solo letras (sin acentos) y espacios
+            const regex = /^[A-Za-z\s]+$/;
             if (!regex.test(nombre.value)) {
-                alert('El nombre solo puede contener letras y espacios.');
+                alert('El nombre solo puede contener letras (sin acentos) y espacios.');
                 nombre.focus();
                 valid = false;
             }
             if (!regex.test(apellido.value)) {
-                alert('El apellido solo puede contener letras y espacios.');
+                alert('El apellido solo puede contener letras (sin acentos) y espacios.');
                 apellido.focus();
                 valid = false;
             }

@@ -1,6 +1,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
     <button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">🌙 Modo oscuro</button>
     <h1 class="titulo">Panel de administracion de postulantes</h1>
+    <div style="height: 24px;"></div>
+    <div style="width:100%; display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:0; margin-top:110px;">
+        <input type="text" id="filtroNombre" placeholder="filtrar por nombre" style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:0px; text-align:center;">
+        <input type="text" id="filtroApellido" placeholder="Filtrar por apellido" style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:850px; text-align:center;">
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -36,8 +42,8 @@
                 <td>
                     <button class="btn preview-btn" data-img="/uploads/maria_gonzalez_foto.jpg">ver foto</button>
                 </td>
-                <td>maría</td>
-                <td>gonzález</td>
+                <td>maria</td>
+                <td>gonzalez</td>
                 <td>femenino</td>
                 <td>53</td>
                 <td><div class="scrollable-cell">av. san martín 123</div></td>
@@ -70,7 +76,7 @@
                     <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
                 </td>
                 <td>juan</td>
-                <td>pérez</td>
+                <td>perez</td>
                 <td>masculino</td>
                 <td>32</td>
                 <td><div class="scrollable-cell">calle 11 buenos aires argentina, mitad de cuadra puerta marron lalalallalalalalalalaaaaaaaaaaaaaaaaaaaaaa</div></td>
@@ -101,7 +107,7 @@
                     <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
                 </td>
                 <td>juan</td>
-                <td>pérez</td>
+                <td>perez</td>
                 <td>masculino</td>
                 <td>28</td>
                 <td><div class="scrollable-cell">calle falsa 456</div></td>
@@ -131,8 +137,8 @@
                 <td>
                     <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
                 </td>
-                <td>juan</td>
-                <td>pérez</td>
+                <td>martin</td>
+                <td>gonzalez</td>
                 <td>masculino</td>
                 <td>41</td>
                 <td><div class="scrollable-cell">calle falsa 456</div></td>
@@ -168,6 +174,21 @@
 
 
         <script>
+        // Filtro por nombre y apellido
+        function filtrarTabla() {
+            const nombre = document.getElementById('filtroNombre').value.trim().toLowerCase();
+            const apellido = document.getElementById('filtroApellido').value.trim().toLowerCase();
+            document.querySelectorAll('table tbody tr').forEach(row => {
+                const nombreCelda = row.children[2].textContent.trim().toLowerCase();
+                const apellidoCelda = row.children[3].textContent.trim().toLowerCase();
+                let mostrar = true;
+                if (nombre && !nombreCelda.includes(nombre)) mostrar = false;
+                if (apellido && !apellidoCelda.includes(apellido)) mostrar = false;
+                row.style.display = mostrar ? '' : 'none';
+            });
+        }
+        document.getElementById('filtroNombre').addEventListener('input', filtrarTabla);
+        document.getElementById('filtroApellido').addEventListener('input', filtrarTabla);
         document.getElementById('darkModeBtn').addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
             this.textContent = document.body.classList.contains('dark-mode') ? '☀️ Modo claro' : '🌙 Modo oscuro';

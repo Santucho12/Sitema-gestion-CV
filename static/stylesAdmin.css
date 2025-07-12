@@ -169,7 +169,7 @@ h1 {
 }
 
 table {
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: auto;
   border-collapse: collapse;
   font-size: var(--font-size-sm);
