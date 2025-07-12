@@ -1,3 +1,39 @@
+.scrollable-cell {
+  max-height: 70px;
+  overflow-y: auto;
+  display: block;
+  white-space: normal;
+  word-break: break-word;
+}
+
+body.dark-mode {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+}
+.dark-mode .container,
+.dark-mode table {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+  border-color: #444 !important;
+}
+.dark-mode th {
+  background: #333 !important;
+  color: #e0e0e0 !important;
+}
+.dark-mode td {
+  background: #222 !important;
+  color: #e0e0e0 !important;
+}
+.dark-mode .btn {
+  background: linear-gradient(135deg, #444 0%, #222 100%) !important;
+  color: #fff !important;
+}
+.dark-mode .btn-danger {
+  background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%) !important;
+}
+.dark-mode .btn:hover {
+  background: #000 !important;
+}
 /* Variables CSS para mejor mantenimiento */
 :root {
   --primary-color: #d3b687;
@@ -384,3 +420,4 @@ td.id-col {
 .gap-2 {
   gap: var(--spacing-xs);
 }
+

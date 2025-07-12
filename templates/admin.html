@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
+    <button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">🌙 Modo oscuro</button>
     <h1 class="titulo">Panel de administracion de postulantes</h1>
     <table>
         <thead>
@@ -24,6 +25,7 @@
                 <th class="sortable" data-col="18">movilidad propia</th>
                 <th>currículum</th>
                 <th class="sortable" data-col="21">calificación</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -38,14 +40,14 @@
                 <td>gonzález</td>
                 <td>femenino</td>
                 <td>53</td>
-                <td>av. san martín 123</td>
+                <td><div class="scrollable-cell">av. san martín 123</div></td>
                 <td>soltera</td>
                 <td>full time</td>
                 <td>universitaria</td>
                 <td>sí</td>
                 <td>sí</td>
                 <td>sí</td>
-                <td>producción de panificados y facturas</td>
+                <td><div class="scrollable-cell">producción de panificados y facturas</div></td>
                 <td>sí</td>
                 <td>no</td>
                 <td>avanzado</td>
@@ -53,6 +55,12 @@
                 <td>no</td>
                 <td><a class="btn" href="/uploads/maria_gonzalez_cv.pdf" target="_blank">ver cv</a></td>
                 <td class="rating" data-id="1" data-value="0"></td>
+                <td>
+                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
+                        <input type="hidden" name="id" value="1">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
+                    </form>
+                </td>
             </tr>
 
             <!-- ejemplo 2 -->
@@ -65,14 +73,14 @@
                 <td>pérez</td>
                 <td>masculino</td>
                 <td>32</td>
-                <td>calle falsa 456</td>
+                <td><div class="scrollable-cell">calle 11, Buenos Aires, Argentina. Puerta naranja de madera, más de 20 años de antigüedad. Tocar timbre al llegar.</div></td>
                 <td>casado</td>
                 <td>part time</td>
                 <td>secundaria</td>
                 <td>no</td>
                 <td>no</td>
                 <td>sí</td>
-                <td>elaboración de masas y bollería</td>
+                <td><div class="scrollable-cell">elaboración de masas y bollería Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolor odio earum officia, animi eveniet facilis nihil delectus doloribus dicta cupiditate repellat, optio doloremque voluptatibus atque consequatur possimus incidunt veritatis.</div></td>
                 <td>no</td>
                 <td>sí</td>
                 <td>básico</td>
@@ -80,6 +88,12 @@
                 <td>sí</td>
                 <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
                 <td class="rating" data-id="2" data-value="0"></td>
+                <td>
+                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
+                        <input type="hidden" name="id" value="2">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <td>4</td>
@@ -90,14 +104,14 @@
                 <td>pérez</td>
                 <td>masculino</td>
                 <td>28</td>
-                <td>calle falsa 456</td>
+                <td><div class="scrollable-cell">calle falsa 456</div></td>
                 <td>casado</td>
                 <td>part time</td>
                 <td>secundaria</td>
                 <td>no</td>
                 <td>no</td>
                 <td>sí</td>
-                <td>elaboración de masas y bollería</td>
+                <td><div class="scrollable-cell">elaboración de masas y bollería</div></td>
                 <td>no</td>
                 <td>sí</td>
                 <td>básico</td>
@@ -105,6 +119,12 @@
                 <td>sí</td>
                 <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
                 <td class="rating" data-id="4" data-value="0"></td>
+                <td>
+                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
+                        <input type="hidden" name="id" value="4">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <td>3</td>
@@ -115,14 +135,14 @@
                 <td>pérez</td>
                 <td>masculino</td>
                 <td>41</td>
-                <td>calle falsa 456</td>
+                <td><div class="scrollable-cell">calle falsa 456</div></td>
                 <td>casado</td>
                 <td>part time</td>
                 <td>secundaria</td>
                 <td>no</td>
                 <td>no</td>
                 <td>sí</td>
-                <td>elaboración de masas y bollería</td>
+                <td><div class="scrollable-cell">elaboración de masas y bollería</div></td>
                 <td>no</td>
                 <td>sí</td>
                 <td>básico</td>
@@ -130,6 +150,12 @@
                 <td>sí</td>
                 <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
                 <td class="rating" data-id="3" data-value="0"></td>
+                <td>
+                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
+                        <input type="hidden" name="id" value="3">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
+                    </form>
+                </td>
             </tr>
 
         </tbody>
@@ -142,7 +168,12 @@
 
 
         <script>
-            document.querySelectorAll('.rating').forEach(cell => {
+        document.getElementById('darkModeBtn').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.textContent = document.body.classList.contains('dark-mode') ? '☀️ Modo claro' : '🌙 Modo oscuro';
+        });
+
+        document.querySelectorAll('.rating').forEach(cell => {
                 const stars = 5;
                 let value = parseInt(cell.dataset.value) || 0;
                 cell.innerHTML = '';
@@ -191,15 +222,20 @@
                     const tbody = th.closest('table').querySelector('tbody');
                     const rows = Array.from(tbody.querySelectorAll('tr'));
 
-                    sortState[colIndex] = !sortState[colIndex];
-                    const isAsc = sortState[colIndex];
+                    // Invert initial sort direction: first click is descending
+                    if (sortState[colIndex] === undefined) {
+                        sortState[colIndex] = true; // true = descending first
+                    } else {
+                        sortState[colIndex] = !sortState[colIndex];
+                    }
+                    const isDesc = sortState[colIndex];
 
                     let sortFn;
                     if (colIndex === 21) { // calificación
                         sortFn = (a, b) => {
                             const aVal = parseInt(a.querySelector('.rating').dataset.value) || 0;
                             const bVal = parseInt(b.querySelector('.rating').dataset.value) || 0;
-                            return isAsc ? aVal - bVal : bVal - aVal;
+                            return isDesc ? bVal - aVal : aVal - bVal;
                         };
                     } else {
                         sortFn = (a, b) => {
@@ -208,9 +244,9 @@
                             const aNum = parseFloat(aVal);
                             const bNum = parseFloat(bVal);
                             if (!isNaN(aNum) && !isNaN(bNum) && aVal !== '' && bVal !== '') {
-                                return isAsc ? aNum - bNum : bNum - aNum;
+                                return isDesc ? bNum - aNum : aNum - bNum;
                             }
-                            return isAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                            return isDesc ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
                         };
                     }
                     rows.sort(sortFn);
