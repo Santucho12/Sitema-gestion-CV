@@ -168,6 +168,11 @@
     </table>
     </div>
 
+    <!-- Popup de imagen -->
+    <div id="image-popup" style="display:none;position:absolute;z-index:9999;border:2px solid #222;background:#fff;padding:6px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
+        <img src="" alt="Previsualización" style="max-width:180px;max-height:180px;display:block;">
+    </div>
+
 
 
 
@@ -275,22 +280,25 @@
                 });
             });
 
-            const popup = document.getElementById('image-popup');
-            const popupImg = popup.querySelector('img');
-            document.querySelectorAll('.preview-btn').forEach(btn => {
-                btn.addEventListener('mouseenter', e => {
-                    const imgSrc = btn.getAttribute('data-img');
+        // Popup de previsualización de foto
+        var popup = document.getElementById('image-popup');
+        var popupImg = popup.querySelector('img');
+        document.querySelectorAll('a.btn').forEach(function(link) {
+            if (link.textContent.trim().toLowerCase() === 'ver foto') {
+                link.addEventListener('mouseenter', function(e) {
+                    var imgSrc = link.getAttribute('href');
                     popupImg.src = imgSrc;
                     popup.style.display = 'block';
-                    const rect = btn.getBoundingClientRect();
-                    popup.style.top = (rect.bottom + window.scrollY + 5) + 'px';
-                    popup.style.left = (rect.left + window.scrollX) + 'px';
+                    var rect = link.getBoundingClientRect();
+                    popup.style.top = (rect.bottom + window.scrollY + 8 - 130) + 'px'; // Move popup 50px higher
+                    popup.style.left = (rect.left + window.scrollX+70) + 'px';
                 });
-                btn.addEventListener('mouseleave', () => {
+                link.addEventListener('mouseleave', function() {
                     popup.style.display = 'none';
                     popupImg.src = '';
                 });
-            });
+            }
+        });
         </script>
 
     </body>
