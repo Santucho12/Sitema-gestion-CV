@@ -148,7 +148,7 @@
 
             <!-- Currículum y Foto (obligatorios) -->
             <fieldset>
-                <legend>Currículum y Foto</legend>
+                <legend>Currículum y Foto <span style="color:red">*</span></legend>
                 <!-- Subida de CV -->
                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required style="display:none"
                     onchange="updateFileName(this, 'cv-info', 'cv-btn')" />
@@ -178,7 +178,7 @@
             if (input.files.length > 0) {
                 const fileName = input.files[0].name;
                 btn.classList.add('cv-cargado');
-                infoSpan.textContent = `✅ ${fileName}`;
+                infoSpan.textContent = `✅ `;
             }
         }
 

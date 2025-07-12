@@ -35,135 +35,45 @@
             </tr>
         </thead>
         <tbody>
-
-            <!-- ejemplo 1 -->
+        {% for p in postulantes %}
             <tr>
-                <td>1</td>
+                <td>{{ p.id_postulante }}</td>
                 <td>
-                    <a class="btn" href="/admin/uploads/depositphotos_34527159-stock-photo-woman-with-tablet.jpg" target="_blank">ver foto</a>
+                    {% if p.ruta_foto %}
+                        <a class="btn" href="/admin/uploads/{{ p.ruta_foto }}" target="_blank">ver foto</a>
+                    {% else %}-{% endif %}
                 </td>
-                <td>maria</td>
-                <td>gonzalez</td>
-                <td>femenino</td>
-                <td>53</td>
-                <td><div class="scrollable-cell">av. san martín 123</div></td>
-                <td>soltera</td>
-                <td>full time</td>
-                <td>universitaria</td>
-                <td>sí</td>
-                <td>sí</td>
-                <td>sí</td>
-                <td><div class="scrollable-cell">producción de panificados y facturas</div></td>
-                <td>sí</td>
-                <td>no</td>
-                <td>avanzado</td>
-                <td>sí</td>
-                <td>no</td>
-                <td><a class="btn" href="/admin/uploads/franco_gonzalez_CV%20Santiago%20Segal(C%23).pdf" target="_blank">ver cv</a></td>
-                <td class="rating" data-id="1" data-value="0"></td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.apellido }}</td>
+                <td>{{ p.sexo }}</td>
+                <td>{% if p.fecha_nacimiento %}{{ ((today - p.fecha_nacimiento).days // 365) if p.fecha_nacimiento else '' }}{% endif %}</td>
+                <td><div class="scrollable-cell">{{ p.direccion }}</div></td>
+                <td>{{ p.estado_civil }}</td>
+                <td>{{ p.disponibilidad_horaria }}</td>
+                <td>{{ p.tipo_formacion }}</td>
+                <td>{{ 'sí' if p.curso_manipulacion_alimentos else 'no' }}</td>
+                <td>{{ 'sí' if p.atencion_publico else 'no' }}</td>
+                <td>{{ 'sí' if p.experiencia_produccion else 'no' }}</td>
+                <td><div class="scrollable-cell">{{ p.conocimientos_produccion }}</div></td>
+                <td>{{ 'sí' if p.experiencia_administrativa else 'no' }}</td>
+                <td>{{ 'sí' if p.experiencia_reparto else 'no' }}</td>
+                <td>{{ p.nivel_excel }}</td>
+                <td>{{ 'sí' if p.licencia_auto else 'no' }}</td>
+                <td>{{ 'sí' if p.tiene_movilidad_propia else 'no' }}</td>
+                <td>
+                    {% if p.ruta_cv %}
+                        <a class="btn" href="/admin/uploads/{{ p.ruta_cv }}" target="_blank">ver cv</a>
+                    {% else %}-{% endif %}
+                </td>
+                <td class="rating" data-id="{{ p.id_postulante }}" data-value="{{ p.calificacion or 0 }}"></td>
                 <td>
                     <form method="POST" action="/eliminar_postulante" style="display:inline;">
-                        <input type="hidden" name="id" value="1">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
+                        <input type="hidden" name="id" value="{{ p.id_postulante }}">
+                        <button type="button" class="btn btn-danger" onclick="eliminarPostulante(this, '{{ p.id_postulante }}')">Eliminar</button>
                     </form>
                 </td>
             </tr>
-
-            <!-- ejemplo 2 -->
-            <tr>
-                <td>2</td>
-                <td>
-                    <a class="btn" href="/admin/uploads/depositphotos_34527159-stock-photo-woman-with-tablet.jpg" target="_blank">ver foto</a>
-                </td>
-                <td>juan</td>
-                <td>perez</td>
-                <td>masculino</td>
-                <td>32</td>
-                <td><div class="scrollable-cell">calle 11 buenos aires argentina, mitad de cuadra puerta marron lalalallalalalalalalaaaaaaaaaaaaaaaaaaaaaa</div></td>
-                <td>casado</td>
-                <td>part time</td>
-                <td>secundaria</td>
-                <td>no</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><div class="scrollable-cell">elaboración de masas y facturas, trabaje por 10 años haciendo cosas de panaderia lalalalalallalalallalalallalalalalallalalallalalalallalalalelaboración de masas y facturas, trabaje por 10 años haciendo cosas de panaderia.</div></td>
-                <td>no</td>
-                <td>sí</td>
-                <td>básico</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><a class="btn" href="/admin/uploads/franco_gonzalez_CV%20Santiago%20Segal(C%23).pdf" target="_blank">ver cv</a></td>
-                <td class="rating" data-id="2" data-value="0"></td>
-                <td>
-                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
-                        <input type="hidden" name="id" value="2">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>
-                    <a class="btn" href="/admin/uploads/depositphotos_34527159-stock-photo-woman-with-tablet.jpg" target="_blank">ver foto</a>
-                </td>
-                <td>juan</td>
-                <td>perez</td>
-                <td>masculino</td>
-                <td>28</td>
-                <td><div class="scrollable-cell">calle falsa 456</div></td>
-                <td>casado</td>
-                <td>part time</td>
-                <td>secundaria</td>
-                <td>no</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><div class="scrollable-cell">elaboración de masas y bollería</div></td>
-                <td>no</td>
-                <td>sí</td>
-                <td>básico</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><a class="btn" href="/admin/uploads/franco_gonzalez_CV%20Santiago%20Segal(C%23).pdf" target="_blank">ver cv</a></td>
-                <td class="rating" data-id="4" data-value="0"></td>
-                <td>
-                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
-                        <input type="hidden" name="id" value="4">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>
-                    <a class="btn" href="/admin/uploads/depositphotos_34527159-stock-photo-woman-with-tablet.jpg" target="_blank">ver foto</a>
-                </td>
-                <td>martin</td>
-                <td>gonzalez</td>
-                <td>masculino</td>
-                <td>41</td>
-                <td><div class="scrollable-cell">calle falsa 456</div></td>
-                <td>casado</td>
-                <td>part time</td>
-                <td>secundaria</td>
-                <td>no</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><div class="scrollable-cell">elaboración de masas y bollería</div></td>
-                <td>no</td>
-                <td>sí</td>
-                <td>básico</td>
-                <td>no</td>
-                <td>sí</td>
-                <td><a class="btn" href="/admin/uploads/franco_gonzalez_CV%20Santiago%20Segal(C%23).pdf" target="_blank">ver cv</a></td>
-                <td class="rating" data-id="3" data-value="0"></td>
-                <td>
-                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
-                        <input type="hidden" name="id" value="3">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este postulante?');">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-
+        {% endfor %}
         </tbody>
     </table>
     </div>
@@ -179,6 +89,30 @@
 
 
         <script>
+        // Eliminar postulante por AJAX
+        function eliminarPostulante(btn, id) {
+            if (!confirm('¿Seguro que quieres eliminar este postulante?')) return;
+            fetch('/admin/eliminar_postulante', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Eliminar la fila de la tabla
+                    const row = btn.closest('tr');
+                    row.parentNode.removeChild(row);
+                } else {
+                    alert('Error al eliminar postulante');
+                }
+            })
+            .catch(() => {
+                alert('Error de conexión');
+            });
+        }
         // Filtro por nombre y apellido
         function filtrarTabla() {
             const nombre = document.getElementById('filtroNombre').value.trim().toLowerCase();
@@ -215,7 +149,28 @@
                         value = i;
                         cell.dataset.value = value;
                         highlight(cell, value);
-                        console.log(`Postulante ${cell.dataset.id} calificado con ${value} estrellas`);
+                        // AJAX para guardar calificación
+                        fetch('/admin/calificar', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id_postulante: cell.dataset.id,
+                                calificacion: value
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                cell.title = 'Calificación guardada';
+                            } else {
+                                cell.title = 'Error al guardar';
+                            }
+                        })
+                        .catch(() => {
+                            cell.title = 'Error de conexión';
+                        });
                     });
                     cell.appendChild(star);
                 }
