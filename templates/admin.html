@@ -1,51 +1,241 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>📋 Panel de Postulantes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>📋 Panel de Postulantes</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Experiencia en atención al público</th>
-                    <th>Experiencia en producción</th>
-                    <th>Currículum</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for postulante in postulantes %}
-                <tr>
-                    <td>{{ postulante[0] }}</td>
-                    <td>{{ postulante[1] }}</td>
-                    <td>{{ postulante[2] }}</td>
-                    <td class="{{ 'yes' if postulante[3] == 1 else 'no' }}">
-                        {{ 'Sí' if postulante[3] == 1 else 'No' }}
-                    </td>
-                    <td class="{{ 'yes' if postulante[4] == 1 else 'no' }}">
-                        {{ 'Sí' if postulante[4] == 1 else 'No' }}
-                    </td>
-                    <td>
-                        {% if postulante[5] %}
-                            <a class="btn" href="{{ url_for('admin.ver_cv', nombre_archivo=postulante[5]) }}" target="_blank">Ver CV</a>
-                        {% else %}
-                            No disponible
-                        {% endif %}
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="6">No hay postulantes registrados.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
+    <h1 class="titulo">Panel de administracion de postulantes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>foto</th>
+                <th>nombre</th>
+                <th>apellido</th>
+                <th class="sortable" data-col="4">sexo</th>
+                <th class="sortable" data-col="5">Edad</th>
+                <th>dirección</th>
+                <th class="sortable" data-col="7">estado civil</th>
+                <th class="sortable" data-col="8">disponibilidad horaria</th>
+                <th>tipo de formación</th>
+                <th class="sortable" data-col="10">curso manipulación alimentos</th>
+                <th class="sortable" data-col="11">atención al público</th>
+                <th class="sortable" data-col="12">experiencia en producción</th>
+                <th>conocimientos de producción</th>
+                <th class="sortable" data-col="14">experiencia administrativa</th>
+                <th class="sortable" data-col="15">experiencia en reparto</th>
+                <th class="sortable" data-col="16">nivel excel</th>
+                <th class="sortable" data-col="17">licencia de auto</th>
+                <th class="sortable" data-col="18">movilidad propia</th>
+                <th>currículum</th>
+                <th class="sortable" data-col="21">calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- ejemplo 1 -->
+            <tr>
+                <td>1</td>
+                <td>
+                    <button class="btn preview-btn" data-img="/uploads/maria_gonzalez_foto.jpg">ver foto</button>
+                </td>
+                <td>maría</td>
+                <td>gonzález</td>
+                <td>femenino</td>
+                <td>53</td>
+                <td>av. san martín 123</td>
+                <td>soltera</td>
+                <td>full time</td>
+                <td>universitaria</td>
+                <td>sí</td>
+                <td>sí</td>
+                <td>sí</td>
+                <td>producción de panificados y facturas</td>
+                <td>sí</td>
+                <td>no</td>
+                <td>avanzado</td>
+                <td>sí</td>
+                <td>no</td>
+                <td><a class="btn" href="/uploads/maria_gonzalez_cv.pdf" target="_blank">ver cv</a></td>
+                <td class="rating" data-id="1" data-value="0"></td>
+            </tr>
+
+            <!-- ejemplo 2 -->
+            <tr>
+                <td>2</td>
+                <td>
+                    <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
+                </td>
+                <td>juan</td>
+                <td>pérez</td>
+                <td>masculino</td>
+                <td>32</td>
+                <td>calle falsa 456</td>
+                <td>casado</td>
+                <td>part time</td>
+                <td>secundaria</td>
+                <td>no</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>elaboración de masas y bollería</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>básico</td>
+                <td>no</td>
+                <td>sí</td>
+                <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
+                <td class="rating" data-id="2" data-value="0"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>
+                    <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
+                </td>
+                <td>juan</td>
+                <td>pérez</td>
+                <td>masculino</td>
+                <td>28</td>
+                <td>calle falsa 456</td>
+                <td>casado</td>
+                <td>part time</td>
+                <td>secundaria</td>
+                <td>no</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>elaboración de masas y bollería</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>básico</td>
+                <td>no</td>
+                <td>sí</td>
+                <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
+                <td class="rating" data-id="4" data-value="0"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <button class="btn preview-btn" data-img="/uploads/juan_perez_foto.jpg">ver foto</button>
+                </td>
+                <td>juan</td>
+                <td>pérez</td>
+                <td>masculino</td>
+                <td>41</td>
+                <td>calle falsa 456</td>
+                <td>casado</td>
+                <td>part time</td>
+                <td>secundaria</td>
+                <td>no</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>elaboración de masas y bollería</td>
+                <td>no</td>
+                <td>sí</td>
+                <td>básico</td>
+                <td>no</td>
+                <td>sí</td>
+                <td><a class="btn" href="/uploads/juan_perez_cv.pdf" target="_blank">ver cv</a></td>
+                <td class="rating" data-id="3" data-value="0"></td>
+            </tr>
+
+        </tbody>
+    </table>
     </div>
-</body>
-</html>
+
+
+
+
+
+
+        <script>
+            document.querySelectorAll('.rating').forEach(cell => {
+                const stars = 5;
+                let value = parseInt(cell.dataset.value) || 0;
+                cell.innerHTML = '';
+                for (let i = 1; i <= stars; i++) {
+                    const star = document.createElement('span');
+                    star.textContent = '★';
+                    star.dataset.value = i;
+                    star.style.cursor = 'pointer';
+                    star.style.color = i <= value ? '#ffc107' : '#999';
+                    star.addEventListener('mouseover', () => highlight(cell, i));
+                    star.addEventListener('mouseout', () => highlight(cell, value));
+                    star.addEventListener('click', () => {
+                        value = i;
+                        cell.dataset.value = value;
+                        highlight(cell, value);
+                        console.log(`Postulante ${cell.dataset.id} calificado con ${value} estrellas`);
+                    });
+                    cell.appendChild(star);
+                }
+            });
+
+            function highlight(cell, val) {
+                const stars = cell.querySelectorAll('span');
+                stars.forEach((star, index) => {
+                    star.style.color = index < val ? '#ffc107' : '#999';
+                });
+            }
+
+            // Ordenar por ID de forma descendente al cargar la página
+            document.addEventListener('DOMContentLoaded', function() {
+                const tbody = document.querySelector('table tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                rows.sort((a, b) => {
+                    const aId = parseInt(a.children[0].textContent) || 0;
+                    const bId = parseInt(b.children[0].textContent) || 0;
+                    return bId - aId;
+                });
+                rows.forEach(row => tbody.appendChild(row));
+            });
+
+            // Alternar orden ascendente/descendente solo en columnas 'sortable'
+            let sortState = {};
+            document.querySelectorAll('th.sortable').forEach(th => {
+                th.addEventListener('click', function() {
+                    const colIndex = parseInt(th.getAttribute('data-col'));
+                    const tbody = th.closest('table').querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    sortState[colIndex] = !sortState[colIndex];
+                    const isAsc = sortState[colIndex];
+
+                    let sortFn;
+                    if (colIndex === 21) { // calificación
+                        sortFn = (a, b) => {
+                            const aVal = parseInt(a.querySelector('.rating').dataset.value) || 0;
+                            const bVal = parseInt(b.querySelector('.rating').dataset.value) || 0;
+                            return isAsc ? aVal - bVal : bVal - aVal;
+                        };
+                    } else {
+                        sortFn = (a, b) => {
+                            const aVal = a.children[colIndex].textContent.trim().toLowerCase();
+                            const bVal = b.children[colIndex].textContent.trim().toLowerCase();
+                            const aNum = parseFloat(aVal);
+                            const bNum = parseFloat(bVal);
+                            if (!isNaN(aNum) && !isNaN(bNum) && aVal !== '' && bVal !== '') {
+                                return isAsc ? aNum - bNum : bNum - aNum;
+                            }
+                            return isAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                        };
+                    }
+                    rows.sort(sortFn);
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+
+            const popup = document.getElementById('image-popup');
+            const popupImg = popup.querySelector('img');
+            document.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', e => {
+                    const imgSrc = btn.getAttribute('data-img');
+                    popupImg.src = imgSrc;
+                    popup.style.display = 'block';
+                    const rect = btn.getBoundingClientRect();
+                    popup.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+                    popup.style.left = (rect.left + window.scrollX) + 'px';
+                });
+                btn.addEventListener('mouseleave', () => {
+                    popup.style.display = 'none';
+                    popupImg.src = '';
+                });
+            });
+        </script>
+
+    </body>
+
+    </html>

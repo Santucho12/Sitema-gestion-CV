@@ -1,98 +1,184 @@
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel=
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir CV - Formulario Elegante</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Completo - Postulantes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
+
 <body>
     <div class="container">
-        <h1>Te gustaria formar <br>parte de Boston?</h1>
+        <h1>¿Te gustaría formar parte del equipo de Boston?</h1>
 
         {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-              {% for message in messages %}
-                <li class="{% if '✅' in message %}success{% else %}error{% endif %}">
-                  {{ message }}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li class="{% if '✅' in message %}success{% else %}error{% endif %}">
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         {% endwith %}
 
-        <form action="/submit" method="POST" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-    <div class="form-group gradient">
-        <label for="nombre">Nombre</label>
-        <div class="input-wrapper">
-            <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre">
-        </div>
+        <form action="/submit" method="POST" enctype="multipart/form-data">
+
+            <!-- Datos personales (Postulantes) -->
+            <div class="form-group">
+                <label for="nombre">Nombre <span style="color:red">*</span></label>
+                <input type="text" id="nombre" name="nombre" maxlength="100" required />
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido <span style="color:red">*</span></label>
+                <input type="text" id="apellido" name="apellido" maxlength="100" required />
+            </div>
+            <div class="form-group">
+                <label for="sexo">Sexo <span style="color:red">*</span></label>
+                <select id="sexo" name="sexo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha de nacimiento <span style="color:red">*</span></label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required placeholder="dd/mm/aaaa" pattern="\d{4}-\d{2}-\d{2}" />
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección <span style="color:red">*</span></label>
+                <textarea id="direccion" name="direccion" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="estado_civil">Estado Civil <span style="color:red">*</span></label>
+                <select id="estado_civil" name="estado_civil" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Soltero/a">Soltero/a</option>
+                    <option value="Casado/a">Casado/a</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="disponibilidad_horaria">Disponibilidad horaria <span style="color:red">*</span></label>
+                <select id="disponibilidad_horaria" name="disponibilidad_horaria" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Full time">Full time</option>
+                    <option value="Part time">Part time</option>
+                    <option value="Part time">Actualmente trabajando</option>
+                </select>
+            </div>
+
+            <!-- Formación Académica (formacion) -->
+            <fieldset>
+                <legend>Formación Académica</legend>
+                <div class="form-group">
+                    <label for="tipo_formacion">Tipo de formación</label>
+                    <select id="tipo_formacion" name="tipo_formacion" required>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Secundaria">Secundaria</option>
+                        <option value="Terciaria">Terciaria</option>
+                        <option value="Universitaria">Universitaria</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Curso de Manipulación de Alimentos -->
+            <fieldset>
+                <legend>Curso de Manipulación de Alimentos</legend>
+                <div class="form-group">
+                    <label><input type="checkbox" id="curso_manipulacion_alimentos" name="curso_manipulacion_alimentos" /> Realizó el curso de manipulación de alimentos</label>
+                </div>
+            </fieldset>
+
+            <!-- Experiencia en Panadería (ExperienciaPanaderia) -->
+            <fieldset>
+                <legend>Experiencia en Panadería</legend>
+                <div class="form-group">
+                    <label><input type="checkbox" name="atencion_publico" /> Atención al público</label>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="experiencia_produccion" /> Experiencia en producción</label>
+                </div>
+                <div class="form-group">
+                    <label for="conocimientos_produccion">Conocimientos de producción</label>
+                    <textarea id="conocimientos_produccion" name="conocimientos_produccion" placeholder="Ejemplo: producción de panificados y factura..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="experiencia_administrativa" /> Experiencia administrativa</label>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="experiencia_reparto" /> Experiencia en reparto</label>
+                </div>
+            </fieldset>
+
+            <!-- Conocimientos de Excel (ConocimientosExcel) -->
+            <fieldset>
+                <legend>Conocimientos de Excel</legend>
+                <div class="form-group">
+                    <label for="nivel_excel">Nivel</label>
+                    <select id="nivel_excel" name="nivel_excel">
+                        <option value="Ninguno">Ninguno</option>
+                        <option value="Básico">Básico</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                        <option value="Experto">Experto</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Movilidad -->
+            <fieldset>
+                <legend>Movilidad</legend>
+                <div class="form-group">
+                    <label><input type="checkbox" name="licencia_auto" /> Licencia de auto</label>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" name="tiene_movilidad_propia" /> Movilidad propia</label>
+                </div>
+            </fieldset>
+
+            <!-- Currículum y Foto (obligatorios) -->
+            <fieldset>
+                <legend>Currículum y Foto</legend>
+                <!-- Subida de CV -->
+                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required style="display:none"
+                    onchange="updateFileName(this, 'cv-info', 'cv-btn')" />
+                <button type="button" class="submit-btn" id="cv-btn"
+                    onclick="document.getElementById('cv').click()">
+                    Agregar Currículum
+                    <span id="cv-info"></span>
+                </button>
+                <!-- Subida de Foto -->
+                <input type="file" id="foto_postulante" name="foto_postulante" accept="image/*" required style="display:none"
+                    onchange="updateFileName(this, 'foto-info', 'foto-btn')" />
+                <button type="button" class="submit-btn" id="foto-btn"
+                    onclick="document.getElementById('foto_postulante').click()" style="margin-top: 1em;">
+                    Agregar Foto Personal
+                    <span id="foto-info"></span>
+                </button>
+            </fieldset>
+
+            <button type="submit" class="btn">Enviar Formulario</button>
+        </form>
     </div>
-
-    <div class="form-group gradient">
-        <label for="apellido">Apellido</label>
-        <div class="input-wrapper">
-            <input type="text" id="apellido" name="apellido" required placeholder="Ingresa tu apellido">
-        </div>
-    </div>
-
-
-    <!-- Experiencia en atención al público -->
-    <div class="form-group">
-        <label>¿Tenés experiencia en atención al público?</label>
-        <div class="input-wrapper">
-            <label><input type="radio" name="exp_publico" value="si" required> Sí</label>
-            <label><input type="radio" name="exp_publico" value="no"> No</label>
-        </div>
-    </div>
-
-    <!-- Experiencia en producción -->
-    <div class="form-group">
-        <label>¿Tenés experiencia en producción?</label>
-        <div class="input-wrapper">
-            <label><input type="radio" name="exp_produccion" value="si" required> Sí</label>
-            <label><input type="radio" name="exp_produccion" value="no"> No</label>
-        </div>
-    </div>
-
-    <div class="form-group ">
-        <label for="cv">📄 Currículum</label>
-        <div class="file-input-wrapper">
-            <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required onchange="updateFileName(this)">
-            <label for="cv" class="file-input-label" id="file-label">
-                <span>Seleccionar archivo PDF o DOC</span>
-                <small>Haz clic para elegir tu currículum</small>
-            </label>
-        </div>
-    </div>
-
-    <button type="submit" class="submit-btn" id="submit-btn">
-        Enviar Currículum
-    </button>
-</form>
-
 
     <script>
-        function updateFileName(input) {
-            const label = document.getElementById('file-label');
+        function updateFileName(input, infoSpanId, btnId) {
+            const infoSpan = document.getElementById(infoSpanId);
+            const btn = document.getElementById(btnId);
+
             if (input.files.length > 0) {
                 const fileName = input.files[0].name;
-                label.innerHTML = `
-                    <span style="color: #28a745;">✅ ${fileName}</span>
-                    <small>Archivo seleccionado correctamente</small>
-                `;
+                btn.classList.add('cv-cargado');
+                infoSpan.textContent = `✅ ${fileName}`;
             }
         }
 
-        function handleSubmit(event) {
-            const btn = document.getElementById('submit-btn');
-            btn.classList.add('loading');
-            btn.innerHTML = 'Enviando...';
-        }
-
-        // Efectos de entrada
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const inputs = document.querySelectorAll('input[type="text"]');
             inputs.forEach((input, index) => {
                 input.style.animationDelay = `${index * 0.1}s`;
@@ -101,4 +187,5 @@
         });
     </script>
 </body>
+
 </html>
