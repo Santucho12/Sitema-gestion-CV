@@ -1,5 +1,5 @@
 # este archivo es el que arranca todo, es como el motor del sistema
-# aca se arma la app flask y se conectan todos los pedazos
+# aca se arma la app flask y se conectan todos puzzle
 
 import os
 from flask import Flask
@@ -8,12 +8,10 @@ from auth import auth  # importas la instancia ya creada
 from routes.main import main_bp
 from routes.admin import admin_bp
 
-# funcion para crear la app, bien prolijo
+# funcion para crear la app
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)  # le metemos la config que armamos antes
-
-    # no hace falta auth.init_app(app), ya esta todo listo
+    app.config.from_object(Config)  #la config que armamos antes
 
     app.register_blueprint(main_bp)  # conectamos las rutas principales
     app.register_blueprint(admin_bp)  # conectamos las rutas del admin
@@ -24,7 +22,7 @@ def create_app():
 
     return app  # devolvemos la app lista para usar
 
-# aca es donde realmente se arranca el servidor
+ se arranca el servidor
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)  # esto lo pone en modo debug, asi ves los errores y todo lo que pasa
+    app.run(debug=True)  # esto lo pone en modo debug,para ver todo lo que pasa

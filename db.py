@@ -12,10 +12,10 @@ def get_db_connection():
             user=Config.DB_USER,
             password=Config.DB_PASSWORD,
             database=Config.DB_NAME
-        )
+        )#aca avisamos
         logging.info("conexion a la base de datos exitosa")
         return conn
     except mysql.connector.Error as err:
-        # si explota algo, lo mostramos y devolvemos None
+        # si algo no funciona lo mostramos y devolvemos None
         logging.error(f"error de conexion a la base de datos: {err}")
         return None

@@ -1,6 +1,4 @@
-# este archivo es el corazon de la config, aca pones todo lo importante asi no te volves loco buscando datos
-# todo lo que es clave, ruta, usuario y contrasena va aca, bien ordenadito
-
+# este archivo es el corazon de la config, aca esta lo importante asi no te volves loco buscando datos
 import os
 from dotenv import load_dotenv  # esto sirve para cargar las variables del archivo .env
 
@@ -18,5 +16,5 @@ class Config:
     DB_PASSWORD = os.getenv('DB_PASSWORD')  # contrasena de la base
     DB_NAME = os.getenv('DB_NAME')  # nombre de la base
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"  # si usas sqlalchemy, aca va la uri
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # esto es para que no te tire warnings al usar sqlalchemy

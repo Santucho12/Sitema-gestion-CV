@@ -9,9 +9,9 @@ DB_CONFIG = {
     'password': Config.DB_PASSWORD,
     'database': Config.DB_NAME
 }
-
+#cuando eliminas un postulante, se borran sus datos de varias tablas y archivos asociados
 def limpiar_archivos_huerfanos():
-    # bueno aca conectamos a la base, tranqui
+    # bueno aca conectamos a la db
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
@@ -31,7 +31,7 @@ def limpiar_archivos_huerfanos():
         eliminados = []
         # revisamos uno por uno los archivos
         for archivo in uploads:
-            # si el archivo no esta en la base, chau, lo borramos
+            # si el archivo no esta en la base, se borra
             if archivo not in archivos_db:
                 ruta = os.path.join(UPLOAD_FOLDER, archivo)
                 try:
@@ -50,5 +50,5 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 
 def allowed_file(filename):
-    # aca chequeamos que el archivo tenga extension permitida, nada raro
+    # aca chequeamos que el archivo tenga extension permitida
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
