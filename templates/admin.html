@@ -40,7 +40,7 @@
                 <td>{{ p.id_postulante }}</td>
                 <td>
                     {% if p.ruta_foto %}
-                        <a class="btn" href="/admin/uploads/{{ p.ruta_foto }}" target="_blank">ver foto</a>
+                        <a class="btnFoto" href="/admin/uploads/{{ p.ruta_foto }}" target="_blank" title="Ver foto" style="background-image:url('/admin/uploads/{{ p.ruta_foto }}');"></a>
                     {% else %}-{% endif %}
                 </td>
                 <td>{{ p.nombre }}</td>
@@ -238,21 +238,19 @@
         // Popup de previsualización de foto
         var popup = document.getElementById('image-popup');
         var popupImg = popup.querySelector('img');
-        document.querySelectorAll('a.btn').forEach(function(link) {
-            if (link.textContent.trim().toLowerCase() === 'ver foto') {
-                link.addEventListener('mouseenter', function(e) {
-                    var imgSrc = link.getAttribute('href');
-                    popupImg.src = imgSrc;
-                    popup.style.display = 'block';
-                    var rect = link.getBoundingClientRect();
-                    popup.style.top = (rect.bottom + window.scrollY + 8 - 130) + 'px'; // Move popup 50px higher
-                    popup.style.left = (rect.left + window.scrollX+70) + 'px';
-                });
-                link.addEventListener('mouseleave', function() {
-                    popup.style.display = 'none';
-                    popupImg.src = '';
-                });
-            }
+        document.querySelectorAll('a.btnFoto').forEach(function(link) {
+            link.addEventListener('mouseenter', function(e) {
+                var imgSrc = link.getAttribute('href');
+                popupImg.src = imgSrc;
+                popup.style.display = 'block';
+                var rect = link.getBoundingClientRect();
+                popup.style.top = (rect.bottom + window.scrollY + 8 - 130) + 'px'; // Move popup 50px higher
+                popup.style.left = (rect.left + window.scrollX+70) + 'px';
+            });
+            link.addEventListener('mouseleave', function() {
+                popup.style.display = 'none';
+                popupImg.src = '';
+            });
         });
         </script>
 
