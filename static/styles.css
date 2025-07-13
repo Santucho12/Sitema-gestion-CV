@@ -854,9 +854,6 @@ textarea:focus-visible,
 .container>form>*:nth-child(13) {
     animation-delay: 1.3s;
 }
-/* Ya está en el inline style, pero podés ponerlo aquí */
-#image-popup img {
-  display: block;
-  max-width: 300px;
-  max-height: 300px;
-}
+ .no-hover-bg:hover {
+                    background: #ffffff !important;
+                }
