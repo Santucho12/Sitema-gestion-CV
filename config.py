@@ -1,19 +1,22 @@
+# este archivo es el corazon de la config, aca pones todo lo importante asi no te volves loco buscando datos
+# todo lo que es clave, ruta, usuario y contrasena va aca, bien ordenadito
+
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # esto sirve para cargar las variables del archivo .env
 
-load_dotenv()
+load_dotenv()  # aca cargamos las variables de entorno, tipo claves y contras
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # aca sacamos la ruta base del proyecto
 
 class Config:
-    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-    AUTH_USERNAME = os.getenv('AUTH_USERNAME')
-    AUTH_PASSWORD = os.getenv('AUTH_PASSWORD')
-    DB_HOST = os.getenv('DB_HOST')
-    DB_USER = os.getenv('DB_USER')
-    DB_PASSWORD = os.getenv('DB_PASSWORD')
-    DB_NAME = os.getenv('DB_NAME')
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')  # clave secreta para flask, para que no te hackeen
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')  # aca van los archivos que suben los usuarios
+    AUTH_USERNAME = os.getenv('AUTH_USERNAME')  # usuario para entrar al panel admin
+    AUTH_PASSWORD = os.getenv('AUTH_PASSWORD')  # contrasena para el panel admin
+    DB_HOST = os.getenv('DB_HOST')  # host de la base de datos
+    DB_USER = os.getenv('DB_USER')  # usuario de la base
+    DB_PASSWORD = os.getenv('DB_PASSWORD')  # contrasena de la base
+    DB_NAME = os.getenv('DB_NAME')  # nombre de la base
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"  # si usas sqlalchemy, aca va la uri
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # esto es para que no te tire warnings al usar sqlalchemy

@@ -50,6 +50,9 @@ def eliminar_postulante():
                         os.remove(foto_path)
                     except Exception as err:
                         logging.error(f"No se pudo eliminar la foto: {foto_path} - {err}")
+        # Limpiar archivos huérfanos después de eliminar
+        from utils import limpiar_archivos_huerfanos
+        limpiar_archivos_huerfanos()
         return jsonify({'success': True})
     except Exception as e:
         logging.error(f"Error al eliminar postulante: {e}")
