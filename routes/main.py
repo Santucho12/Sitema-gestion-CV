@@ -58,7 +58,7 @@ def submit():
     filename_foto = f"{nombre}_{apellido}_{foto_postulante.filename}"
     filepath_foto = os.path.join(app.config['UPLOAD_FOLDER'], filename_foto)
 
-   
+
     try:
         # aca se guardan los archivos y se mete todo en la base
         archivo.save(filepath_cv)
@@ -144,3 +144,5 @@ def submit():
         logging.error(f'Error al registrar el postulante: {err}')
         flash(f'❌ Error al registrar el postulante: {err}')
         return redirect(url_for('main.index'))
+    finally:
+        pass

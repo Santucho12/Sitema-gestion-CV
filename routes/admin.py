@@ -57,6 +57,8 @@ def eliminar_postulante():
     except Exception as e:
         logging.error(f"Error al eliminar postulante: {e}")
         return jsonify({'success': False, 'error': str(e)})
+    finally:
+        pass
 
 ## aca el admin pone las estrellitas
 @admin_bp.route('/calificar', methods=['POST'])
@@ -76,6 +78,8 @@ def calificar():
     except Exception as e:
         logging.error(f"Error al actualizar calificación: {e}")
         return jsonify({'success': False, 'error': str(e)})
+    finally:
+        pass
 
 ## aca se muestra el panel admin con todos los datos
 @admin_bp.route('/')
