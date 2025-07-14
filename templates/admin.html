@@ -1,259 +1,98 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
-    <button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">🌙 Modo oscuro</button>
-    <h1 class="titulo">Panel de administracion de postulantes</h1>
-    <div style="height: 24px;"></div>
-    <div style="width:100%; display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:0; margin-top:110px;">
-        <input type="text" id="filtroNombre" placeholder="filtrar por nombre" style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:0px; text-align:center;">
-        <input type="text" id="filtroApellido" placeholder="Filtrar por apellido" style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:840px; text-align:center;">
-    </div>
+<button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">🌙 Modo oscuro</button>
+<h1 class="titulo">Panel de administracion de postulantes</h1>
+<div
+    style="width:100%; display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:0; margin-top:110px;">
+    <input type="text" id="filtroNombre" placeholder="filtrar por nombre"
+        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:0px; text-align:center;">
+    <input type="text" id="filtroApellido" placeholder="Filtrar por apellido"
+        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:870px; text-align:center;">
+</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>foto</th>
-                <th>nombre</th>
-                <th>apellido</th>
-                <th class="sortable" data-col="4">sexo</th>
-                <th class="sortable" data-col="5">Edad</th>
-                <th>dirección</th>
-                <th class="sortable" data-col="7">estado civil</th>
-                <th class="sortable" data-col="8">disponibilidad horaria</th>
-                <th>tipo de formación</th>
-                <th class="sortable" data-col="10">curso manipulación alimentos</th>
-                <th class="sortable" data-col="11">atención al público</th>
-                <th class="sortable" data-col="12">experiencia en producción</th>
-                <th>conocimientos de producción</th>
-                <th class="sortable" data-col="14">experiencia administrativa</th>
-                <th class="sortable" data-col="15">experiencia en reparto</th>
-                <th class="sortable" data-col="16">nivel excel</th>
-                <th class="sortable" data-col="17">licencia de auto</th>
-                <th class="sortable" data-col="18">movilidad propia</th>
-                <th>currículum</th>
-                <th class="sortable" data-col="21">calificación</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>foto</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th class="sortable" data-col="4">sexo</th>
+            <th class="sortable" data-col="5">Edad</th>
+            <th>dirección</th>
+            <th class="sortable" data-col="7">estado civil</th>
+            <th class="sortable" data-col="8">disponibilidad horaria</th>
+            <th>tipo de formación</th>
+            <th class="sortable" data-col="10">curso manipulación alimentos</th>
+            <th class="sortable" data-col="11">atención al público</th>
+            <th class="sortable" data-col="12">experiencia en producción</th>
+            <th>conocimientos de producción</th>
+            <th class="sortable" data-col="14">experiencia administrativa</th>
+            <th class="sortable" data-col="15">experiencia en reparto</th>
+            <th class="sortable" data-col="16">nivel excel</th>
+            <th class="sortable" data-col="17">licencia de auto</th>
+            <th class="sortable" data-col="18">movilidad propia</th>
+            <th>currículum</th>
+            <th class="sortable" data-col="21">calificación</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for p in postulantes %}
-            <tr>
-                <td>{{ p.id_postulante }}</td>
-                <td>
-                    {% if p.ruta_foto %}
-                        <a class="btnFoto" href="/admin/uploads/{{ p.ruta_foto }}" target="_blank" title="Ver foto" style="background-image:url('/admin/uploads/{{ p.ruta_foto }}');"></a>
-                    {% else %}-{% endif %}
-                </td>
-                <td>{{ p.nombre }}</td>
-                <td>{{ p.apellido }}</td>
-                <td>{{ p.sexo }}</td>
-                <td>{% if p.fecha_nacimiento %}{{ ((today - p.fecha_nacimiento).days // 365) if p.fecha_nacimiento else '' }}{% endif %}</td>
-                <td><div class="scrollable-cell">{{ p.direccion }}</div></td>
-                <td>{{ p.estado_civil }}</td>
-                <td>{{ p.disponibilidad_horaria }}</td>
-                <td>{{ p.tipo_formacion }}</td>
-                <td>{{ 'sí' if p.curso_manipulacion_alimentos else 'no' }}</td>
-                <td>{{ 'sí' if p.atencion_publico else 'no' }}</td>
-                <td>{{ 'sí' if p.experiencia_produccion else 'no' }}</td>
-                <td><div class="scrollable-cell">{{ p.conocimientos_produccion }}</div></td>
-                <td>{{ 'sí' if p.experiencia_administrativa else 'no' }}</td>
-                <td>{{ 'sí' if p.experiencia_reparto else 'no' }}</td>
-                <td>{{ p.nivel_excel }}</td>
-                <td>{{ 'sí' if p.licencia_auto else 'no' }}</td>
-                <td>{{ 'sí' if p.tiene_movilidad_propia else 'no' }}</td>
-                <td>
-                    {% if p.ruta_cv %}
-                        <a class="btn" href="/admin/uploads/{{ p.ruta_cv }}" target="_blank">ver cv</a>
-                    {% else %}-{% endif %}
-                </td>
-                <td class="rating" data-id="{{ p.id_postulante }}" data-value="{{ p.calificacion or 0 }}"></td>
-                <td>
-                    <form method="POST" action="/eliminar_postulante" style="display:inline;">
-                        <input type="hidden" name="id" value="{{ p.id_postulante }}">
-                        <button type="button" class="btn btn-danger" onclick="eliminarPostulante(this, '{{ p.id_postulante }}')">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>{{ p.id_postulante }}</td>
+            <td>
+                {% if p.ruta_foto %}
+                <a class="btnFoto" href="/admin/uploads/{{ p.ruta_foto }}" target="_blank" title="Ver foto"
+                    style="background-image:url('/admin/uploads/{{ p.ruta_foto }}');"></a>
+                {% else %}-{% endif %}
+            </td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.apellido }}</td>
+            <td>{{ p.sexo }}</td>
+            <td>{% if p.fecha_nacimiento %}{{ ((today - p.fecha_nacimiento).days // 365) if p.fecha_nacimiento else ''
+                }}{% endif %}</td>
+            <td>
+                <div class="scrollable-cell">{{ p.direccion }}</div>
+            </td>
+            <td>{{ p.estado_civil }}</td>
+            <td>{{ p.disponibilidad_horaria }}</td>
+            <td>{{ p.tipo_formacion }}</td>
+            <td>{{ 'sí' if p.curso_manipulacion_alimentos else 'no' }}</td>
+            <td>{{ 'sí' if p.atencion_publico else 'no' }}</td>
+            <td>{{ 'sí' if p.experiencia_produccion else 'no' }}</td>
+            <td>
+                <div class="scrollable-cell">{{ p.conocimientos_produccion }}</div>
+            </td>
+            <td>{{ 'sí' if p.experiencia_administrativa else 'no' }}</td>
+            <td>{{ 'sí' if p.experiencia_reparto else 'no' }}</td>
+            <td>{{ p.nivel_excel }}</td>
+            <td>{{ 'sí' if p.licencia_auto else 'no' }}</td>
+            <td>{{ 'sí' if p.tiene_movilidad_propia else 'no' }}</td>
+            <td>
+                {% if p.ruta_cv %}
+                <a class="btn" href="/admin/uploads/{{ p.ruta_cv }}" target="_blank">ver cv</a>
+                {% else %}-{% endif %}
+            </td>
+            <td class="rating" data-id="{{ p.id_postulante }}" data-value="{{ p.calificacion or 0 }}"></td>
+            <td>
+                <button type="button" class="btn btn-danger"
+                    onclick="eliminarPostulante(this, '{{ p.id_postulante }}')">Eliminar</button>
+            </td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
-    </div>
+    </tbody>
+</table>
+</div>
 
-    <!-- Popup de imagen -->
-    <div id="image-popup" style="display:none;position:absolute;z-index:9999;border:2px solid #222;background:#fff;padding:6px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
-        <img src="" alt="Previsualización" style="max-width:180px;max-height:180px;display:block;">
-    </div>
-
-
-
+<!-- Popup de imagen -->
+<div id="image-popup"
+    style="display:none;position:absolute;z-index:9999;border:2px solid #222;background:#fff;padding:6px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
+    <img src="" alt="Previsualización" style="max-width:180px;max-height:180px;display:block;">
+</div>
 
 
 
-        <script>
-        // Eliminar postulante por AJAX
-        function eliminarPostulante(btn, id) {
-            if (!confirm('¿Seguro que quieres eliminar este postulante?')) return;
-            fetch('/admin/eliminar_postulante', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Eliminar la fila de la tabla
-                    const row = btn.closest('tr');
-                    row.parentNode.removeChild(row);
-                } else {
-                    alert('Error al eliminar postulante');
-                }
-            })
-            .catch(() => {
-                alert('Error de conexión');
-            });
-        }
-        // Filtro por nombre y apellido
-        function filtrarTabla() {
-            const nombre = document.getElementById('filtroNombre').value.trim().toLowerCase();
-            const apellido = document.getElementById('filtroApellido').value.trim().toLowerCase();
-            document.querySelectorAll('table tbody tr').forEach(row => {
-                const nombreCelda = row.children[2].textContent.trim().toLowerCase();
-                const apellidoCelda = row.children[3].textContent.trim().toLowerCase();
-                let mostrar = true;
-                if (nombre && !nombreCelda.includes(nombre)) mostrar = false;
-                if (apellido && !apellidoCelda.includes(apellido)) mostrar = false;
-                row.style.display = mostrar ? '' : 'none';
-            });
-        }
-        document.getElementById('filtroNombre').addEventListener('input', filtrarTabla);
-        document.getElementById('filtroApellido').addEventListener('input', filtrarTabla);
-        document.getElementById('darkModeBtn').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            this.textContent = document.body.classList.contains('dark-mode') ? '☀️ Modo claro' : '🌙 Modo oscuro';
-        });
+<script src="{{ url_for('static', filename='javascript/admin.js') }}"></script>
+</body>
 
-        document.querySelectorAll('.rating').forEach(cell => {
-                const stars = 5;
-                let value = parseInt(cell.dataset.value) || 0;
-                cell.innerHTML = '';
-                for (let i = 1; i <= stars; i++) {
-                    const star = document.createElement('span');
-                    star.textContent = '★';
-                    star.dataset.value = i;
-                    star.style.cursor = 'pointer';
-                    star.style.color = i <= value ? '#ffc107' : '#999';
-                    star.addEventListener('mouseover', () => highlight(cell, i));
-                    star.addEventListener('mouseout', () => highlight(cell, value));
-                    star.addEventListener('click', () => {
-                        value = i;
-                        cell.dataset.value = value;
-                        highlight(cell, value);
-                        // AJAX para guardar calificación
-                        fetch('/admin/calificar', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                id_postulante: cell.dataset.id,
-                                calificacion: value
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                cell.title = 'Calificación guardada';
-                            } else {
-                                cell.title = 'Error al guardar';
-                            }
-                        })
-                        .catch(() => {
-                            cell.title = 'Error de conexión';
-                        });
-                    });
-                    cell.appendChild(star);
-                }
-            });
-
-            function highlight(cell, val) {
-                const stars = cell.querySelectorAll('span');
-                stars.forEach((star, index) => {
-                    star.style.color = index < val ? '#ffc107' : '#999';
-                });
-            }
-
-            // Ordenar por ID de forma descendente al cargar la página
-            document.addEventListener('DOMContentLoaded', function() {
-                const tbody = document.querySelector('table tbody');
-                const rows = Array.from(tbody.querySelectorAll('tr'));
-                rows.sort((a, b) => {
-                    const aId = parseInt(a.children[0].textContent) || 0;
-                    const bId = parseInt(b.children[0].textContent) || 0;
-                    return bId - aId;
-                });
-                rows.forEach(row => tbody.appendChild(row));
-            });
-
-            // Alternar orden ascendente/descendente solo en columnas 'sortable'
-            let sortState = {};
-            document.querySelectorAll('th.sortable').forEach(th => {
-                th.addEventListener('click', function() {
-                    const colIndex = parseInt(th.getAttribute('data-col'));
-                    const tbody = th.closest('table').querySelector('tbody');
-                    const rows = Array.from(tbody.querySelectorAll('tr'));
-
-                    // Invert initial sort direction: first click is descending
-                    if (sortState[colIndex] === undefined) {
-                        sortState[colIndex] = true; // true = descending first
-                    } else {
-                        sortState[colIndex] = !sortState[colIndex];
-                    }
-                    const isDesc = sortState[colIndex];
-
-                    let sortFn;
-                    if (colIndex === 21) { // calificación
-                        sortFn = (a, b) => {
-                            const aVal = parseInt(a.querySelector('.rating').dataset.value) || 0;
-                            const bVal = parseInt(b.querySelector('.rating').dataset.value) || 0;
-                            return isDesc ? bVal - aVal : aVal - bVal;
-                        };
-                    } else {
-                        sortFn = (a, b) => {
-                            const aVal = a.children[colIndex].textContent.trim().toLowerCase();
-                            const bVal = b.children[colIndex].textContent.trim().toLowerCase();
-                            const aNum = parseFloat(aVal);
-                            const bNum = parseFloat(bVal);
-                            if (!isNaN(aNum) && !isNaN(bNum) && aVal !== '' && bVal !== '') {
-                                return isDesc ? bNum - aNum : aNum - bNum;
-                            }
-                            return isDesc ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
-                        };
-                    }
-                    rows.sort(sortFn);
-                    rows.forEach(row => tbody.appendChild(row));
-                });
-            });
-
-        // Popup de previsualización de foto
-        var popup = document.getElementById('image-popup');
-        var popupImg = popup.querySelector('img');
-        document.querySelectorAll('a.btnFoto').forEach(function(link) {
-            link.addEventListener('mouseenter', function(e) {
-                var imgSrc = link.getAttribute('href');
-                popupImg.src = imgSrc;
-                popup.style.display = 'block';
-                var rect = link.getBoundingClientRect();
-                popup.style.top = (rect.bottom + window.scrollY + 8 - 130) + 'px'; // Move popup 50px higher
-                popup.style.left = (rect.left + window.scrollX+70) + 'px';
-            });
-            link.addEventListener('mouseleave', function() {
-                popup.style.display = 'none';
-                popupImg.src = '';
-            });
-        });
-        </script>
-
-    </body>
-
-    </html>
+</html>

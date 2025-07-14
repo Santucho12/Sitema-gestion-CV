@@ -8,12 +8,14 @@ main_bp = Blueprint('main', __name__)
 logging.basicConfig(level=logging.INFO)
 
 @main_bp.route('/')
+## aca se muestra el formulario para que la gente se anote
 def index():
-    return render_template('form.html')
+    return render_template('index.html')
 
 @main_bp.route('/submit', methods=['POST'])
+## aca se procesa el formulario cuando alguien se anota
 def submit():
-    # Obtener todos los campos del formulario
+    # aca se agarran todos los datos del form
     nombre = request.form.get('nombre', '').strip()
     apellido = request.form.get('apellido', '').strip()
     sexo = request.form.get('sexo', '')
@@ -33,9 +35,10 @@ def submit():
     tiene_movilidad_propia = 1 if request.form.get('tiene_movilidad_propia') else 0
     archivo = request.files.get('cv')
     foto_postulante = request.files.get('foto_postulante')
-    calificacion = 0  # Por defecto, hasta que el admin la modifique
+    calificacion = 0  # arranca en cero, despues el admin la cambia
 
     # Validación básica
+    # aca se valida que no falte nada importante
     if not nombre or not apellido:
         flash('❌ Nombre y apellido son obligatorios.')
         return redirect(url_for('main.index'))
@@ -49,12 +52,15 @@ def submit():
         flash('❌ Debes adjuntar una foto.')
         return redirect(url_for('main.index'))
 
+    # aca se arma el nombre y la ruta de los archivos
     filename_cv = f"{nombre}_{apellido}_{archivo.filename}"
     filepath_cv = os.path.join(app.config['UPLOAD_FOLDER'], filename_cv)
     filename_foto = f"{nombre}_{apellido}_{foto_postulante.filename}"
     filepath_foto = os.path.join(app.config['UPLOAD_FOLDER'], filename_foto)
 
+   
     try:
+        # aca se guardan los archivos y se mete todo en la base
         archivo.save(filepath_cv)
         foto_postulante.save(filepath_foto)
         conn = get_db_connection()
@@ -63,7 +69,7 @@ def submit():
             logging.error('No se pudo conectar a la base de datos.')
             return redirect(url_for('main.index'))
         cursor = conn.cursor()
-        # 1. Insertar en Postulantes
+        # primero se mete el postulante
         cursor.execute(
             """
             INSERT INTO Postulantes (nombre, apellido, sexo, fecha_nacimiento, direccion, estado_civil, disponibilidad_horaria, curso_manipulacion_alimentos, calificacion)
@@ -73,7 +79,7 @@ def submit():
         )
         id_postulante = cursor.lastrowid
 
-        # 2. Insertar en Formacion
+        # despues se mete la formacion
         cursor.execute(
             """
             INSERT INTO Formacion (id_postulante, tipo)
@@ -82,7 +88,7 @@ def submit():
             (id_postulante, tipo_formacion)
         )
 
-        # 3. Insertar en ExperienciaPanaderia
+        # experiencia en panaderia
         cursor.execute(
             """
             INSERT INTO ExperienciaPanaderia (id_postulante, experiencia_produccion, conocimientos_produccion)
@@ -91,7 +97,7 @@ def submit():
             (id_postulante, experiencia_produccion, conocimientos_produccion)
         )
 
-        # 4. Insertar en Experiencia
+        # experiencia general
         cursor.execute(
             """
             INSERT INTO Experiencia (id_postulante, atencion_publico, experiencia_administrativa, experiencia_reparto)
@@ -100,7 +106,7 @@ def submit():
             (id_postulante, atencion_publico, experiencia_administrativa, experiencia_reparto)
         )
 
-        # 5. Insertar en ConocimientosExcel
+        # conocimientos de excel
         cursor.execute(
             """
             INSERT INTO ConocimientosExcel (id_postulante, nivel)
@@ -109,7 +115,7 @@ def submit():
             (id_postulante, nivel_excel)
         )
 
-        # 6. Insertar en Movilidad
+        # movilidad
         cursor.execute(
             """
             INSERT INTO Movilidad (id_postulante, licencia_auto, tiene_movilidad_propia)
@@ -118,7 +124,7 @@ def submit():
             (id_postulante, licencia_auto, tiene_movilidad_propia)
         )
 
-        # 7. Insertar en Documentos
+        # documentos
         cursor.execute(
             """
             INSERT INTO Documentos (id_postulante, ruta_cv, ruta_foto)
@@ -134,6 +140,7 @@ def submit():
         flash('✅ Enviaste tu CV correctamente. Muchas gracias por postularte.')
         return redirect(url_for('main.index'))
     except Exception as err:
+        # si algo falla, se muestra el error y se vuelve al inicio
         logging.error(f'Error al registrar el postulante: {err}')
         flash(f'❌ Error al registrar el postulante: {err}')
         return redirect(url_for('main.index'))

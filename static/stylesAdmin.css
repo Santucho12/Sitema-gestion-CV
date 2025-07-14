@@ -39,8 +39,8 @@ th:nth-child(7), td:nth-child(7) { /* dirección */
 }
 
 body.dark-mode {
-  background-color: #222 !important;
-  color: #e0e0e0 !important;
+  background-color: #222;
+  color: #e0e0e0;
 }
 .dark-mode .container,
 .dark-mode table {
@@ -125,7 +125,7 @@ body.dark-mode {
 body {
   font-family:  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background-color: var(--background-color);
-  color: var(--text-primary);
+  color: #333333;
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -160,6 +160,10 @@ body {
     padding: var(--spacing-lg);
     margin: 0;
     border-radius: var(--radius-md);
+  }
+
+  #filtroNombre {
+    margin-left: 20px !important;
   }
 }
 
@@ -303,12 +307,9 @@ tbody tr:nth-child(even):hover {
 }
 
 .btn:hover {
-th.id-col,
-td.id-col {
-  display: none;
-}
   box-shadow: var(--shadow-md);
   background:rgb(0, 0, 0);
+  /* ...existing code... */
 }
 
 .btn:active {
@@ -418,20 +419,7 @@ td.id-col {
 }
 
 /* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #ffffff;
-    --surface-color: #222;
-    --text-primary: #000000;
-    --text-secondary: #C5A36B;
-    --border-color: #000000;
-    --hover-bg: #C5A36B;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #f0f0f0;
-  }
-}
+/* Eliminado bloque @media (prefers-color-scheme: dark) porque el modo oscuro se maneja con la clase .dark-mode en el body. No cambia la estética, solo evita pisar reglas. */
 
 /* Utilidades adicionales */
 .text-center {

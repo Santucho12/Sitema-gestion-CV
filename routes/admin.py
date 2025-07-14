@@ -8,7 +8,7 @@ import datetime
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 logging.basicConfig(level=logging.INFO)
 
-# Ruta para eliminar postulante
+## aca se borra un postulante y todo lo que tiene asociado
 @admin_bp.route('/eliminar_postulante', methods=['POST'])
 @auth.login_required
 def eliminar_postulante():
@@ -58,7 +58,7 @@ def eliminar_postulante():
         logging.error(f"Error al eliminar postulante: {e}")
         return jsonify({'success': False, 'error': str(e)})
 
-# Ruta para actualizar calificación
+## aca el admin pone las estrellitas
 @admin_bp.route('/calificar', methods=['POST'])
 @auth.login_required
 def calificar():
@@ -77,7 +77,7 @@ def calificar():
         logging.error(f"Error al actualizar calificación: {e}")
         return jsonify({'success': False, 'error': str(e)})
 
-# Ruta protegida por login
+## aca se muestra el panel admin con todos los datos
 @admin_bp.route('/')
 @auth.login_required
 def admin():
@@ -111,7 +111,7 @@ def admin():
     logging.info('Acceso a panel admin.')
     return render_template('admin.html', postulantes=postulantes, today=datetime.date.today())
 
-# Ruta protegida para ver archivos subidos
+# aca se muestran los archivos subidos, solo si existen
 @admin_bp.route('/uploads/<nombre_archivo>')
 @auth.login_required
 def ver_cv(nombre_archivo):

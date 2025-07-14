@@ -22,7 +22,7 @@ def create_app():
 
     return app  # devolvemos la app lista para usar
 
- se arranca el servidor
+ #se arranca el servidor
 if __name__ == '__main__':
     app = create_app()
     app.run(debug=True)  # esto lo pone en modo debug,para ver todo lo que pasa

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario Completo - Postulantes</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="stylesheet" href="static/stylesIndex.css" />
 
 </head>
 
@@ -77,7 +77,7 @@
 
             <!-- Formación Académica (formacion) -->
             <fieldset>
-                <legend>Formación Académica</legend>
+                <div class="legend">Formación Académica</div>
                 <div class="form-group">
                     <label for="tipo_formacion">Tipo de formación</label>
                     <select id="tipo_formacion" name="tipo_formacion" required>
@@ -91,14 +91,14 @@
 
             <!-- Curso de Manipulación de Alimentos -->
             <fieldset>
-                <legend>Curso de Manipulación de Alimentos</legend>
+                <div class="legend">Curso de Manipulación de Alimentos</div>
                 <div class="form-group">
-                    <label><input type="checkbox" id="curso_manipulacion_alimentos" name="curso_manipulacion_alimentos" /> Realizó el curso de manipulación de alimentos</label>
+                    <label><input type="checkbox" id="curso_manipulacion_alimentos" name="curso_manipulacion_alimentos" /> Realice el curso de manipulación de alimentos</label>
                 </div>
             </fieldset>
              <!-- Experiencias previas) -->
             <fieldset>
-                <legend>Experiencia</legend>
+                <div class="legend">Experiencia</div>
                 <div class="form-group">
                     <label><input type="checkbox" name="atencion_publico" /> Atención al público</label>
                 </div>
@@ -111,7 +111,7 @@
             </fieldset>
             <!-- Experiencia en Panadería (ExperienciaPanaderia) -->
             <fieldset>
-                <legend>¿Trabajaste en Panadería?</legend>
+                <div class="legend">¿Trabajaste en Panadería?</div>
                 <div class="form-group">
                     <label><input type="checkbox" name="experiencia_produccion" /> Experiencia en producción</label>
                 </div>
@@ -123,7 +123,7 @@
 
             <!-- Conocimientos de Excel (ConocimientosExcel) -->
             <fieldset>
-                <legend>Conocimientos de Excel</legend>
+                <div class="legend">Conocimientos de Excel</div>
                 <div class="form-group">
                     <label for="nivel_excel">Nivel</label>
                     <select id="nivel_excel" name="nivel_excel">
@@ -138,7 +138,7 @@
 
             <!-- Movilidad -->
             <fieldset>
-                <legend>Movilidad</legend>
+                <div class="legend">Movilidad</div>
                 <div class="form-group">
                     <label><input type="checkbox" name="licencia_auto" /> Licencia de auto</label>
                 </div>
@@ -149,12 +149,12 @@
 
             <!-- Currículum y Foto (obligatorios) -->
             <fieldset>
-                <legend>Currículum y Foto <span style="color:red">*</span></legend>
+                <div class="legend">Currículum y Foto <span style="color:red">*</span></div>
                 <!-- Subida de CV -->
                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required style="display:none"
                     onchange="updateFileName(this, 'cv-info', 'cv-btn')" />
                 <button type="button" class="submit-btn" id="cv-btn"
-                    onclick="document.getElementById('cv').click()" required>
+                    onclick="document.getElementById('cv').click()">
                     Agregar Currículum
                     <span id="cv-info"></span>
                 </button>
@@ -162,7 +162,7 @@
                 <input type="file" id="foto_postulante" name="foto_postulante" accept="image/*" required style="display:none"
                     onchange="updateFileName(this, 'foto-info', 'foto-btn')" />
                 <button type="button" class="submit-btn" id="foto-btn"
-                    onclick="document.getElementById('foto_postulante').click()" required style="margin-top: 1em;">
+                    onclick="document.getElementById('foto_postulante').click()" style="margin-top: 1em;">
                     Agregar Foto Personal
                     <span id="foto-info"></span>
                 </button>
@@ -172,53 +172,8 @@
         </form>
     </div>
 
-    <script>
-        function updateFileName(input, infoSpanId, btnId) {
-            const infoSpan = document.getElementById(infoSpanId);
-            const btn = document.getElementById(btnId);
-            if (input.files.length > 0) {
-                const fileName = input.files[0].name;
-                btn.classList.add('cv-cargado');
-                infoSpan.textContent = `✅ `;
-            }
-        }
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const inputs = document.querySelectorAll('input[type="text"]');
-            inputs.forEach((input, index) => {
-                input.style.animationDelay = `${index * 0.1}s`;
-                input.classList.add('fadeIn');
-            });
-        });
-
-        // Validación personalizada al enviar el formulario
-        document.querySelector('form').addEventListener('submit', function(e) {
-            let valid = true;
-            const nombre = document.getElementById('nombre');
-            const apellido = document.getElementById('apellido');
-            const direccion = document.getElementById('direccion');
-            // Solo letras (sin acentos) y espacios
-            const regex = /^[A-Za-z\s]+$/;
-            if (!regex.test(nombre.value)) {
-                alert('El nombre solo puede contener letras (sin acentos) y espacios.');
-                nombre.focus();
-                valid = false;
-            }
-            if (!regex.test(apellido.value)) {
-                alert('El apellido solo puede contener letras (sin acentos) y espacios.');
-                apellido.focus();
-                valid = false;
-            }
-            if (direccion.value.length < 5) {
-                alert('La dirección debe tener al menos 5 caracteres.');
-                direccion.focus();
-                valid = false;
-            }
-            if (!valid) {
-                e.preventDefault();
-            }
-        });
-    </script>
 </body>
 
 </html>

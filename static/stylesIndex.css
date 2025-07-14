@@ -138,7 +138,7 @@ form {
 }
 
 .form-group:hover {
-    transform: translateX(4px);
+    /* regla vacía eliminada */
 }
 
 /* Efecto especial para grupos con clase gradient */
@@ -381,7 +381,7 @@ fieldset:hover {
 }
 
 /* Legends - mantener exactamente igual */
-legend {
+.legend {
     padding: 8px 16px;
     background: #C5A36B;
     color: #fff;
@@ -396,7 +396,7 @@ legend {
     margin-bottom: 20px;
 }
 
-legend::before {
+.legend::before {
     content: '';
     position: absolute;
     top: 0;
@@ -407,7 +407,7 @@ legend::before {
     transition: left 0.6s;
 }
 
-legend:hover::before {
+.legend:hover::before {
     left: 100%;
 }
 
@@ -685,6 +685,9 @@ textarea:focus-visible,
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    *{
+        transform: scale(0.98);
+    }
     body {
         padding: 10px;
     }
@@ -724,7 +727,7 @@ textarea:focus-visible,
         margin-bottom: 24px;
     }
 
-    legend {
+    .legend {
         font-size: 0.875rem;
         padding: 6px 12px;
     }
@@ -755,8 +758,10 @@ textarea:focus-visible,
         border-radius: 16px;
     }
 
-    h1 {
-        font-size: 1.5rem;
+    fieldset {
+        padding: 12px 4px;
+        border-radius: 10px;
+        font-size: 1.1rem;
         margin-bottom: 24px;
     }
 
@@ -765,25 +770,32 @@ textarea:focus-visible,
     input[type="date"],
     select,
     textarea {
-        padding: 12px 14px;
-        font-size: 14px;
-    }
-
-    .btn {
-        padding: 14px;
-        font-size: 14px;
+        padding: 12px 8px;
+        font-size: 15px;
+        width: 100%;
+        box-sizing: border-box;
         letter-spacing: 1px;
     }
 
-    fieldset {
-        padding: 20px 12px;
+    .legend {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+    }
+
+    .btn {
+        padding: 16px 4px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        margin-bottom: 24px;
     }
 
     .form-group label:has(input[type="radio"]) {
         display: block;
         margin-bottom: 8px;
-        margin-right: 0;
-        padding: 8px 12px;
+        font-size: 1.1rem !important;
+        padding: 12px 8px !important;
     }
 
     input[type="file"]~* {
@@ -793,9 +805,7 @@ textarea:focus-visible,
 }
 
 /* Efectos adicionales para mejor UX */
-.form-group:hover {
-    transform: translateX(4px);
-}
+/* ...existing code... */
 
 /* Animación de entrada escalonada para elementos del formulario */
 .container>form>* {
@@ -854,6 +864,3 @@ textarea:focus-visible,
 .container>form>*:nth-child(13) {
     animation-delay: 1.3s;
 }
- .no-hover-bg:hover {
-                    background: #ffffff !important;
-                }
