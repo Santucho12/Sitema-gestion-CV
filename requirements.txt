@@ -1,7 +1,5 @@
-# aca van los paquetes que necesita el proyecto para andar bien
-# si queres instalar todo junto, hace pip install -r requirements.txt y listo
-# asi te aseguras que no te falte nada porque sino vas a tener errores
 Flask>=2.0
 flask-httpauth>=4.8
 mysql-connector-python>=8.0
-pip install python-dotenv
+python-dotenv>=1.0.0
+gunicorn>=20.0.0
