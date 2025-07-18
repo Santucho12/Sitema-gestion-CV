@@ -1,5 +1,6 @@
 import os
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app as app
+from werkzeug.utils import secure_filename
 from db import get_db_connection
 from utils import allowed_file
 import logging
@@ -38,7 +39,6 @@ def submit():
     calificacion = 0  # arranca en cero, despues el admin la cambia
 
     # Validación básica
-    # aca se valida que no falte nada importante
     if not nombre or not apellido:
         flash('❌ Nombre y apellido son obligatorios.')
         return redirect(url_for('main.index'))
@@ -52,24 +52,25 @@ def submit():
         flash('❌ Debes adjuntar una foto.')
         return redirect(url_for('main.index'))
 
-    # aca se arma el nombre y la ruta de los archivos
-    filename_cv = f"{nombre}_{apellido}_{archivo.filename}"
+    # Sanitizar los nombres de archivos para evitar problemas con espacios o caracteres especiales
+    filename_cv = secure_filename(f"{nombre}_{apellido}_{archivo.filename}")
     filepath_cv = os.path.join(app.config['UPLOAD_FOLDER'], filename_cv)
-    filename_foto = f"{nombre}_{apellido}_{foto_postulante.filename}"
+    filename_foto = secure_filename(f"{nombre}_{apellido}_{foto_postulante.filename}")
     filepath_foto = os.path.join(app.config['UPLOAD_FOLDER'], filename_foto)
 
-
     try:
-        # aca se guardan los archivos y se mete todo en la base
+        # Guardar archivos en la carpeta uploads
         archivo.save(filepath_cv)
         foto_postulante.save(filepath_foto)
+
         conn = get_db_connection()
         if conn is None:
             flash('❌ No se pudo conectar a la base de datos.')
             logging.error('No se pudo conectar a la base de datos.')
             return redirect(url_for('main.index'))
+
         cursor = conn.cursor()
-        # primero se mete el postulante
+        # Primero se mete el postulante
         cursor.execute(
             """
             INSERT INTO Postulantes (nombre, apellido, sexo, fecha_nacimiento, direccion, estado_civil, disponibilidad_horaria, curso_manipulacion_alimentos, calificacion)
@@ -79,7 +80,7 @@ def submit():
         )
         id_postulante = cursor.lastrowid
 
-        # despues se mete la formacion
+        # Después se mete la formación
         cursor.execute(
             """
             INSERT INTO Formacion (id_postulante, tipo)
@@ -88,7 +89,7 @@ def submit():
             (id_postulante, tipo_formacion)
         )
 
-        # experiencia en panaderia
+        # Experiencia en panadería
         cursor.execute(
             """
             INSERT INTO ExperienciaPanaderia (id_postulante, experiencia_produccion, conocimientos_produccion)
@@ -97,7 +98,7 @@ def submit():
             (id_postulante, experiencia_produccion, conocimientos_produccion)
         )
 
-        # experiencia general
+        # Experiencia general
         cursor.execute(
             """
             INSERT INTO Experiencia (id_postulante, atencion_publico, experiencia_administrativa, experiencia_reparto)
@@ -106,7 +107,7 @@ def submit():
             (id_postulante, atencion_publico, experiencia_administrativa, experiencia_reparto)
         )
 
-        # conocimientos de excel
+        # Conocimientos de Excel
         cursor.execute(
             """
             INSERT INTO ConocimientosExcel (id_postulante, nivel)
@@ -115,7 +116,7 @@ def submit():
             (id_postulante, nivel_excel)
         )
 
-        # movilidad
+        # Movilidad
         cursor.execute(
             """
             INSERT INTO Movilidad (id_postulante, licencia_auto, tiene_movilidad_propia)
@@ -124,7 +125,7 @@ def submit():
             (id_postulante, licencia_auto, tiene_movilidad_propia)
         )
 
-        # documentos
+        # Documentos (rutas de archivos sanitizadas)
         cursor.execute(
             """
             INSERT INTO Documentos (id_postulante, ruta_cv, ruta_foto)
@@ -140,7 +141,6 @@ def submit():
         flash('✅ Enviaste tu CV correctamente. Muchas gracias por postularte.')
         return redirect(url_for('main.index'))
     except Exception as err:
-        # si algo falla, se muestra el error y se vuelve al inicio
         logging.error(f'Error al registrar el postulante: {err}')
         flash(f'❌ Error al registrar el postulante: {err}')
         return redirect(url_for('main.index'))

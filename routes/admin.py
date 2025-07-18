@@ -33,7 +33,6 @@ def eliminar_postulante():
         cursor.close()
         conn.close()
         # Eliminar archivos del sistema
-        import os
         from config import Config
         if doc:
             if doc.get('ruta_cv'):

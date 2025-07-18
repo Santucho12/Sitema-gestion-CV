@@ -46,7 +46,8 @@ def limpiar_archivos_huerfanos():
     except Exception as e:
         # si algo explota, lo mostramos por consola
         print(f"error al limpiar archivos huerfanos: {e}")
-ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
+ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'gif', 'heic', 'heif', 'webp'}
+
 
 
 def allowed_file(filename):

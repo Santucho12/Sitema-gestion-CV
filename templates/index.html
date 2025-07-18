@@ -7,10 +7,17 @@
     <title>Formulario Completo - Postulantes</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="static/stylesIndex.css" />
-
 </head>
 
 <body>
+    <div id="overlay-confirm" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;justify-content:center;align-items:center;flex-direction:column;">
+        <div style="background:#fff;padding:56px 32px;border-radius:32px;box-shadow:0 8px 32px rgba(0,0,0,0.25);text-align:center;max-width:96vw;">
+            <div style="font-size:4em;color:#28a745;margin-bottom:24px;">✅</div>
+            <div style="font-size:2.2em;color:#222;font-weight:700;">formulario enviado con éxito</div>
+            <div style="margin-top:32px;font-size:1.3em;color:#555;">Gracias por postularte, te tendremos en cuenta para el proceso de seleccion</div>
+        </div>
+    </div>
+
     <div class="container">
         <h1>¿Te gustaría formar parte del equipo de Boston?</h1>
 
@@ -28,14 +35,16 @@
 
         <form action="/submit" method="POST" enctype="multipart/form-data">
 
-            <!-- Datos personales (Postulantes) -->
+            <!-- Datos personales -->
             <div class="form-group">
                 <label for="nombre">Nombre <span style="color:red">*</span></label>
-                <input type="text" id="nombre" name="nombre" maxlength="100" required pattern="^[A-Za-z\s]+$" title="Solo letras (sin acentos) y espacios" />
+                <input type="text" id="nombre" name="nombre" maxlength="100" required pattern="^[A-Za-z\s]+$"
+                    title="Solo letras (sin acentos) y espacios" />
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido <span style="color:red">*</span></label>
-                <input type="text" id="apellido" name="apellido" maxlength="100" required pattern="^[A-Za-z\s]+$" title="Solo letras (sin acentos) y espacios" />
+                <input type="text" id="apellido" name="apellido" maxlength="100" required pattern="^[A-Za-z\s]+$"
+                    title="Solo letras (sin acentos) y espacios" />
             </div>
             <div class="form-group">
                 <label for="sexo">Sexo <span style="color:red">*</span></label>
@@ -48,11 +57,13 @@
             </div>
             <div class="form-group">
                 <label for="fecha_nacimiento">Fecha de nacimiento <span style="color:red">*</span></label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required placeholder="dd/mm/aaaa" pattern="\d{4}-\d{2}-\d{2}" />
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required placeholder="dd/mm/aaaa"
+                    pattern="\d{4}-\d{2}-\d{2}" />
             </div>
             <div class="form-group">
                 <label for="direccion">Dirección <span style="color:red">*</span></label>
-                <textarea id="direccion" name="direccion" required minlength="5" title="Debe ingresar al menos 5 caracteres"></textarea>
+                <textarea id="direccion" name="direccion" required minlength="5"
+                    title="Debe ingresar al menos 5 caracteres"></textarea>
             </div>
             <div class="form-group">
                 <label for="estado_civil">Estado Civil <span style="color:red">*</span></label>
@@ -75,7 +86,7 @@
                 </select>
             </div>
 
-            <!-- Formación Académica (formacion) -->
+            <!-- Formación Académica -->
             <fieldset>
                 <div class="legend">Formación Académica</div>
                 <div class="form-group">
@@ -93,10 +104,12 @@
             <fieldset>
                 <div class="legend">Curso de Manipulación de Alimentos</div>
                 <div class="form-group">
-                    <label><input type="checkbox" id="curso_manipulacion_alimentos" name="curso_manipulacion_alimentos" /> Realice el curso de manipulación de alimentos</label>
+                    <label><input type="checkbox" id="curso_manipulacion_alimentos"
+                            name="curso_manipulacion_alimentos" /> Realicé el curso de manipulación de alimentos</label>
                 </div>
             </fieldset>
-             <!-- Experiencias previas) -->
+
+            <!-- Experiencia -->
             <fieldset>
                 <div class="legend">Experiencia</div>
                 <div class="form-group">
@@ -109,7 +122,8 @@
                     <label><input type="checkbox" name="experiencia_reparto" /> Experiencia en reparto</label>
                 </div>
             </fieldset>
-            <!-- Experiencia en Panadería (ExperienciaPanaderia) -->
+
+            <!-- Producción -->
             <fieldset>
                 <div class="legend">¿Trabajaste en Panadería?</div>
                 <div class="form-group">
@@ -117,11 +131,12 @@
                 </div>
                 <div class="form-group">
                     <label for="conocimientos_produccion">Conocimientos de producción</label>
-                    <textarea id="conocimientos_produccion" name="conocimientos_produccion" placeholder="Ejemplo: producción de panificados y factura..."></textarea>
+                    <textarea id="conocimientos_produccion" name="conocimientos_produccion"
+                        placeholder="Ejemplo: producción de panificados y factura..."></textarea>
                 </div>
             </fieldset>
 
-            <!-- Conocimientos de Excel (ConocimientosExcel) -->
+            <!-- Excel -->
             <fieldset>
                 <div class="legend">Conocimientos de Excel</div>
                 <div class="form-group">
@@ -147,10 +162,11 @@
                 </div>
             </fieldset>
 
-            <!-- Currículum y Foto (obligatorios) -->
+            <!-- Archivos -->
             <fieldset>
                 <div class="legend">Currículum y Foto <span style="color:red">*</span></div>
-                <!-- Subida de CV -->
+
+                <!-- CV -->
                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required style="display:none"
                     onchange="updateFileName(this, 'cv-info', 'cv-btn')" />
                 <button type="button" class="submit-btn" id="cv-btn"
@@ -158,8 +174,10 @@
                     Agregar Currículum
                     <span id="cv-info"></span>
                 </button>
-                <!-- Subida de Foto -->
-                <input type="file" id="foto_postulante" name="foto_postulante" accept="image/*" required style="display:none"
+
+                <!-- Foto -->
+                <input type="file" id="foto_postulante" name="foto_postulante"
+                    accept="image/*" required style="display:none"
                     onchange="updateFileName(this, 'foto-info', 'foto-btn')" />
                 <button type="button" class="submit-btn" id="foto-btn"
                     onclick="document.getElementById('foto_postulante').click()" style="margin-top: 1em;">
@@ -168,12 +186,29 @@
                 </button>
             </fieldset>
 
-            <button type="submit" class="btn">Enviar Formulario</button>
+            <button type="submit" class="btn" id="enviarBtn">Enviar Formulario</button>
         </form>
     </div>
 
     <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+    <script>
+    // mostrar overlay antes de enviar
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault(); // evita envío inmediato
 
+        const form = this;
+
+        if (form.checkValidity()) {
+            const overlay = document.getElementById('overlay-confirm');
+            overlay.style.display = 'flex';
+
+            // enviar luego de 45 segundos
+            setTimeout(function () {
+                form.submit();
+            }, 45000);
+        }
+    });
+    </script>
 </body>
 
 </html>
