@@ -11,36 +11,25 @@
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.2s;
 }
-
 .btnFoto:hover {
   box-shadow: var(--shadow-md);
   outline: 2px solid var(--primary-color);
 }
-
-th:nth-child(3),
-td:nth-child(3) {
-  /* nombre */
+th:nth-child(3), td:nth-child(3) { /* nombre */
   min-width: 180px;
   max-width: 300px;
   width: 220px;
 }
-
-th:nth-child(4),
-td:nth-child(4) {
-  /* apellido */
+th:nth-child(4), td:nth-child(4) { /* apellido */
   min-width: 180px;
   max-width: 300px;
   width: 220px;
 }
-
-th:nth-child(7),
-td:nth-child(7) {
-  /* dirección */
+th:nth-child(7), td:nth-child(7) { /* dirección */
   min-width: 220px;
   max-width: 350px;
   width: 260px;
 }
-
 .scrollable-cell {
   max-height: 70px;
   overflow-y: auto;
@@ -53,37 +42,30 @@ body.dark-mode {
   background-color: #222;
   color: #e0e0e0;
 }
-
 .dark-mode .container,
 .dark-mode table {
   background-color: #222 !important;
   color: #e0e0e0 !important;
   border-color: #444 !important;
 }
-
 .dark-mode th {
   background: #333 !important;
   color: #e0e0e0 !important;
 }
-
 .dark-mode td {
   background: #222 !important;
   color: #e0e0e0 !important;
 }
-
 .dark-mode .btn {
   background: linear-gradient(135deg, #444 0%, #222 100%) !important;
   color: #fff !important;
 }
-
 .dark-mode .btn-danger {
   background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%) !important;
 }
-
 .dark-mode .btn:hover {
   background: #000 !important;
 }
-
 /* Variables CSS para mejor mantenimiento */
 :root {
   --primary-color: #d3b687;
@@ -123,7 +105,6 @@ body.dark-mode {
   overflow-x: auto;
 
 }
-
 .titulo {
   text-align: center;
   color: white;
@@ -142,7 +123,7 @@ body.dark-mode {
 }
 
 body {
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background-color: var(--background-color);
   color: #333333;
   margin: 0;
@@ -175,16 +156,15 @@ body {
     padding: var(--spacing-md);
   }
 
-  .filtros {
-    margin-left: 16px;
+  .container {
+    padding: var(--spacing-lg);
+    margin: 0;
+    border-radius: var(--radius-md);
   }
-}
 
-.container {
-  padding: var(--spacing-lg);
-  margin: 0;
-  border-radius: var(--radius-md);
-}
+  #filtroNombre {
+    margin-left: 20px !important;
+  }
 }
 
 /* Títulos */
@@ -222,8 +202,7 @@ table {
 th {
   background: rgb(231, 203, 158);
   color: #000000;
-  font-weight: var(--font-weight-bold);
-  /* Cambiado a bold para letra más gruesa */
+  font-weight: var(--font-weight-bold); /* Cambiado a bold para letra más gruesa */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.75rem;
@@ -249,7 +228,6 @@ th.id-col,
 td.id-col {
   display: none;
 }
-
 /* Filas de la tabla */
 tbody tr {
   transition: all 0.2s ease;
@@ -270,13 +248,11 @@ tbody tr:nth-child(even) {
   background-color: #F3EAD2;
 }
 
-th:nth-child(14),
-td:nth-child(14) {
+th:nth-child(14), td:nth-child(14) {
   min-width: 320px;
   max-width: 500px;
   width: 400px;
 }
-
 tbody tr:nth-child(even):hover {
   background-color: rgb(208, 206, 206);
 }
@@ -305,12 +281,11 @@ tbody tr:nth-child(even):hover {
 .preview-wrapper:hover .hover-preview {
   display: block;
 }
-
-/* Opcional: cambiar cursor en el header Calificación para indicar que es clickeable */
-#sort-rating {
-  cursor: pointer;
-  user-select: none;
-}
+        /* Opcional: cambiar cursor en el header Calificación para indicar que es clickeable */
+        #sort-rating {
+            cursor: pointer;
+            user-select: none;
+        }
 
 /* Botones mejorados */
 .btn {
@@ -333,7 +308,7 @@ tbody tr:nth-child(even):hover {
 
 .btn:hover {
   box-shadow: var(--shadow-md);
-  background: rgb(0, 0, 0);
+  background:rgb(0, 0, 0);
   /* ...existing code... */
 }
 
@@ -474,3 +449,4 @@ tbody tr:nth-child(even):hover {
 .gap-2 {
   gap: var(--spacing-xs);
 }
+

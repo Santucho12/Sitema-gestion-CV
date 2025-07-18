@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
-<button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">🌙 Modo oscuro</button>
+<button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;">馃寵 Modo oscuro</button>
 <h1 class="titulo">Panel de administracion de postulantes</h1>
 <div
     style="width:100%; display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:0; margin-top:110px;">
     <input type="text" id="filtroNombre" placeholder="filtrar por nombre"
         style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:0px; text-align:center;">
     <input type="text" id="filtroApellido" placeholder="Filtrar por apellido"
-        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:870px; text-align:center;">
+        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:1250px; text-align:center;">
 </div>
 
 <table>
@@ -18,21 +18,21 @@
             <th>apellido</th>
             <th class="sortable" data-col="4">sexo</th>
             <th class="sortable" data-col="5">Edad</th>
-            <th>dirección</th>
+            <th>direcci贸n</th>
             <th class="sortable" data-col="7">estado civil</th>
             <th class="sortable" data-col="8">disponibilidad horaria</th>
-            <th>tipo de formación</th>
-            <th class="sortable" data-col="10">curso manipulación alimentos</th>
-            <th class="sortable" data-col="11">atención al público</th>
-            <th class="sortable" data-col="12">experiencia en producción</th>
-            <th>conocimientos de producción</th>
+            <th>tipo de formaci贸n</th>
+            <th class="sortable" data-col="10">curso manipulaci贸n alimentos</th>
+            <th class="sortable" data-col="11">atenci贸n al p煤blico</th>
+            <th class="sortable" data-col="12">experiencia en producci贸n</th>
+            <th>conocimientos de producci贸n</th>
             <th class="sortable" data-col="14">experiencia administrativa</th>
             <th class="sortable" data-col="15">experiencia en reparto</th>
             <th class="sortable" data-col="16">nivel excel</th>
             <th class="sortable" data-col="17">licencia de auto</th>
             <th class="sortable" data-col="18">movilidad propia</th>
-            <th>currículum</th>
-            <th class="sortable" data-col="21">calificación</th>
+            <th>curr铆culum</th>
+            <th class="sortable" data-col="21">calificaci贸n</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -57,17 +57,17 @@
             <td>{{ p.estado_civil }}</td>
             <td>{{ p.disponibilidad_horaria }}</td>
             <td>{{ p.tipo_formacion }}</td>
-            <td>{{ 'sí' if p.curso_manipulacion_alimentos else 'no' }}</td>
-            <td>{{ 'sí' if p.atencion_publico else 'no' }}</td>
-            <td>{{ 'sí' if p.experiencia_produccion else 'no' }}</td>
+            <td>{{ 's铆' if p.curso_manipulacion_alimentos else 'no' }}</td>
+            <td>{{ 's铆' if p.atencion_publico else 'no' }}</td>
+            <td>{{ 's铆' if p.experiencia_produccion else 'no' }}</td>
             <td>
                 <div class="scrollable-cell">{{ p.conocimientos_produccion }}</div>
             </td>
-            <td>{{ 'sí' if p.experiencia_administrativa else 'no' }}</td>
-            <td>{{ 'sí' if p.experiencia_reparto else 'no' }}</td>
+            <td>{{ 's铆' if p.experiencia_administrativa else 'no' }}</td>
+            <td>{{ 's铆' if p.experiencia_reparto else 'no' }}</td>
             <td>{{ p.nivel_excel }}</td>
-            <td>{{ 'sí' if p.licencia_auto else 'no' }}</td>
-            <td>{{ 'sí' if p.tiene_movilidad_propia else 'no' }}</td>
+            <td>{{ 's铆' if p.licencia_auto else 'no' }}</td>
+            <td>{{ 's铆' if p.tiene_movilidad_propia else 'no' }}</td>
             <td>
                 {% if p.ruta_cv %}
                 <a class="btn" href="/admin/uploads/{{ p.ruta_cv }}" target="_blank">ver cv</a>
@@ -87,7 +87,7 @@
 <!-- Popup de imagen -->
 <div id="image-popup"
     style="display:none;position:absolute;z-index:9999;border:2px solid #222;background:#fff;padding:6px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
-    <img src="" alt="Previsualización" style="max-width:180px;max-height:180px;display:block;">
+    <img src="" alt="Previsualizaci贸n" style="max-width:180px;max-height:180px;display:block;">
 </div>
 
 
