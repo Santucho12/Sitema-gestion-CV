@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario Completo - Postulantes</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="static/stylesIndex.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesIndex.css') }}" />
+
 </head>
 
 <body>
-    <div id="overlay-confirm" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;justify-content:center;align-items:center;flex-direction:column;">
-        <div style="background:#fff;padding:56px 32px;border-radius:32px;box-shadow:0 8px 32px rgba(0,0,0,0.25);text-align:center;max-width:96vw;">
-            <div style="font-size:4em;color:#28a745;margin-bottom:24px;">✅</div>
-            <div style="font-size:2.2em;color:#222;font-weight:700;">formulario enviado con éxito</div>
-            <div style="margin-top:32px;font-size:1.3em;color:#555;">Gracias por postularte, te tendremos en cuenta para el proceso de seleccion</div>
+    <div id="overlay-confirm"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;justify-content:center;align-items:center;flex-direction:column;">
+        <div
+            style="background:#fff;padding:32px 16px;border-radius:18px;box-shadow:0 4px 16px rgba(0,0,0,0.18);text-align:center;max-width:90vw;">
+            <div style="font-size:2.2em;color:#28a745;margin-bottom:16px;">✅</div>
+            <div style="font-size:1.3em;color:#222;font-weight:700;">formulario enviado con éxito</div>
+            <div style="margin-top:18px;font-size:1em;color:#555;">Gracias por postularte, te tendremos en cuenta para
+                el proceso de selección</div>
         </div>
     </div>
 
@@ -116,7 +120,8 @@
                     <label><input type="checkbox" name="atencion_publico" /> Atención al público</label>
                 </div>
                 <div class="form-group">
-                    <label><input type="checkbox" name="experiencia_administrativa" /> Experiencia administrativa</label>
+                    <label><input type="checkbox" name="experiencia_administrativa" /> Experiencia
+                        administrativa</label>
                 </div>
                 <div class="form-group">
                     <label><input type="checkbox" name="experiencia_reparto" /> Experiencia en reparto</label>
@@ -169,16 +174,14 @@
                 <!-- CV -->
                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required style="display:none"
                     onchange="updateFileName(this, 'cv-info', 'cv-btn')" />
-                <button type="button" class="submit-btn" id="cv-btn"
-                    onclick="document.getElementById('cv').click()">
+                <button type="button" class="submit-btn" id="cv-btn" onclick="document.getElementById('cv').click()">
                     Agregar Currículum
                     <span id="cv-info"></span>
                 </button>
 
                 <!-- Foto -->
-                <input type="file" id="foto_postulante" name="foto_postulante"
-                    accept="image/*" required style="display:none"
-                    onchange="updateFileName(this, 'foto-info', 'foto-btn')" />
+                <input type="file" id="foto_postulante" name="foto_postulante" accept="image/*" required
+                    style="display:none" onchange="updateFileName(this, 'foto-info', 'foto-btn')" />
                 <button type="button" class="submit-btn" id="foto-btn"
                     onclick="document.getElementById('foto_postulante').click()" style="margin-top: 1em;">
                     Agregar Foto Personal
@@ -191,23 +194,30 @@
     </div>
 
     <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+
     <script>
-    // mostrar overlay antes de enviar
-    document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault(); // evita envío inmediato
+        // mostrar overlay antes de enviar y hacer scroll al final del formulario en mobile
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault(); // evita envío inmediato
 
-        const form = this;
+            const form = this;
 
-        if (form.checkValidity()) {
-            const overlay = document.getElementById('overlay-confirm');
-            overlay.style.display = 'flex';
+            if (form.checkValidity()) {
+                const overlay = document.getElementById('overlay-confirm');
+                overlay.style.display = 'flex';
 
-            // enviar luego de 45 segundos
-            setTimeout(function () {
-                form.submit();
-            }, 45000);
-        }
-    });
+                if (window.innerWidth <= 768) {
+                    setTimeout(function() {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 100);
+                }
+
+                // enviar luego de 45 segundos
+                setTimeout(function () {
+                    form.submit();
+                }, 45000);
+            }
+        });
     </script>
 </body>
 

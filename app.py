@@ -11,9 +11,9 @@ def create_app():
     app = Flask(__name__, static_url_path='/postularse/static')
     app.config.from_object(Config)  # la config que armamos antes
 
-    # Registramos los blueprints con url_prefix para que las rutas estén bajo /postularse
-    app.register_blueprint(main_bp, url_prefix='/postularse')
-    app.register_blueprint(admin_bp, url_prefix='/postularse/admin')
+    # Registramos los blueprints sin prefijo para rutas directas
+    app.register_blueprint(main_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
 
     # si no existe la carpeta uploads, la creamos para guardar los archivos
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
