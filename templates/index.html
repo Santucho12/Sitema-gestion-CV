@@ -9,11 +9,53 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesIndex.css') }}" />
 
 </head>
+<style>
+    #custom-alert {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.7);
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+    }
+    #custom-alert .alert-box {
+        background: #fff;
+        padding: 32px 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+        text-align: center;
+        max-width: 90vw;
+        font-family: 'Montserrat', sans-serif;
+    }
+    #custom-alert .alert-title {
+        font-size: 1.3em;
+        color: #222;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+    #custom-alert .alert-msg {
+        font-size: 1em;
+        color: #555;
+    }
+</style>
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        alert("Aviso: La información ingresada será almacenada en una base de datos simulada exclusivamente con fines de prueba, garantizando la protección y confidencialidad de los datos reales de nuestro cliente.");
-    }, 6000);
+        var alertDiv = document.createElement('div');
+        alertDiv.id = 'custom-alert';
+        alertDiv.innerHTML = `
+            <div class="alert-box">
+                <div class="alert-title">Aviso</div>
+                <div class="alert-msg">La información ingresada será almacenada en una base de datos simulada exclusivamente con fines de prueba, garantizando la protección y confidencialidad de los datos reales de nuestro cliente.</div>
+            </div>
+        `;
+        document.body.appendChild(alertDiv);
+        setTimeout(function() {
+            alertDiv.style.display = 'flex';
+            setTimeout(function() {
+                alertDiv.style.display = 'none';
+            }, 6000);
+        }, 6000);
 });
 </script>
 
