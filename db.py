@@ -1,21 +1,22 @@
-import mysql.connector
+import psycopg2
+from psycopg2 import OperationalError
 from config import Config
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 def get_db_connection():
-    # aca intentamos conectar con la base, si sale todo bien avisamos
+    """Intenta conectar con la base de datos PostgreSQL y devuelve la conexión"""
     try:
-        conn = mysql.connector.connect(
+        conn = psycopg2.connect(
             host=Config.DB_HOST,
             user=Config.DB_USER,
             password=Config.DB_PASSWORD,
-            database=Config.DB_NAME
-        )#aca avisamos
-        logging.info("conexion a la base de datos exitosa")
+            dbname=Config.DB_NAME,
+            port=Config.DB_PORT
+        )
+        logging.info("Conexión a la base de datos exitosa")
         return conn
-    except mysql.connector.Error as err:
-        # si algo no funciona lo mostramos y devolvemos None
-        logging.error(f"error de conexion a la base de datos: {err}")
+    except OperationalError as err:
+        logging.error(f"Error de conexión a la base de datos: {err}")
         return None
