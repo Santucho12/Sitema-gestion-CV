@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, render_template, send_from_directory, current_app as app, abort, request, jsonify
 from auth import auth
 from db import get_db_connection
+from psycopg2.extras import RealDictCursor  # <-- agregado
 import logging
 import datetime
 
@@ -16,7 +17,7 @@ def eliminar_postulante():
     id_postulante = data.get('id')
     try:
         conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)  # <-- corregido
         # Obtener rutas de archivos antes de eliminar
         cursor.execute("SELECT ruta_cv, ruta_foto FROM Documentos WHERE id_postulante = %s", (id_postulante,))
         doc = cursor.fetchone()
@@ -88,7 +89,7 @@ def admin():
     if conn is None:
         logging.error('No se pudo conectar a la base de datos en /admin.')
         abort(500)
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(cursor_factory=RealDictCursor)  # <-- corregido
     # Consulta con JOINs para traer todos los datos relevantes
     cursor.execute('''
         SELECT

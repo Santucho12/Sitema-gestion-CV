@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import OperationalError
+from psycopg2.extras import RealDictCursor  # <-- agregado
 from config import Config
 import logging
 
