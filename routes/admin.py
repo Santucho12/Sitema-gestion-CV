@@ -127,3 +127,4 @@ def ver_cv(nombre_archivo):
         abort(404)
     logging.info(f"Descarga de archivo: {nombre_archivo}")
     return send_from_directory(folder, nombre_archivo)
+#s
