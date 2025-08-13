@@ -11,10 +11,13 @@ class Config:
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')  # aca van los archivos que suben los usuarios
     AUTH_USERNAME = os.getenv('AUTH_USERNAME')  # usuario para entrar al panel admin
     AUTH_PASSWORD = os.getenv('AUTH_PASSWORD')  # contrasena para el panel admin
+
     DB_HOST = os.getenv('DB_HOST')  # host de la base de datos
     DB_USER = os.getenv('DB_USER')  # usuario de la base
     DB_PASSWORD = os.getenv('DB_PASSWORD')  # contrasena de la base
     DB_NAME = os.getenv('DB_NAME')  # nombre de la base
+    DB_PORT = int(os.getenv('DB_PORT', 5432))  # puerto, 5432 por defecto para PostgreSQL
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    # URI para SQLAlchemy usando PostgreSQL
+    SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # esto es para que no te tire warnings al usar sqlalchemy
