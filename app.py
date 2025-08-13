@@ -4,7 +4,7 @@ from config import Config
 from auth import auth  # importas la instancia ya creada
 from routes.main import main_bp
 from routes.admin import admin_bp
-
+#f
 # funcion para crear la app
 def create_app():
     # Creamos la app con static_url_path para que sirva estáticos desde /postularse/static

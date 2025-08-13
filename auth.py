@@ -4,7 +4,7 @@
 from flask_httpauth import HTTPBasicAuth
 from config import Config
 
-# instancia de autenticacion
+# instancia de autenticacionn
 auth = HTTPBasicAuth()
 
 #armamos el diccionario de usuarios, solo uno en este caso
