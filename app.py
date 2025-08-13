@@ -24,6 +24,6 @@ def create_app():
 # Creamos la instancia de la aplicación a nivel global para que Passenger la encuentre
 app = create_app()
 
-# se arranca el servidor (solo para desarrollo local)
+# se arranca el servidor (solo para desarrollo local))
 if __name__ == '__main__':
     app.run(debug=True)
