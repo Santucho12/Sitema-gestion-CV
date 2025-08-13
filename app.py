@@ -21,7 +21,7 @@ def create_app():
 
     return app  # devolvemos la app lista para usar
 
-# Creamos la instancia de la aplicación a nivel global para que Passenger la encuentre
+# Creamos la instancia de la aplicación a nivel global para que Passenger la encuentree
 app = create_app()
 
 # se arranca el servidor (solo para desarrollo local))
