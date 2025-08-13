@@ -1,4 +1,11 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesAdmin.css') }}" />
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        alert("Esta base de datos es un entorno de demostración y contiene únicamente información ficticia, utilizada con el objetivo de salvaguardar la protección y confidencialidad de los datos reales de nuestro cliente.");
+    }, 6000);
+});
+</script>
 <button id="darkModeBtn" class="btn" style="position:fixed;top:20px;right:20px;z-index:2000;"> Modo oscuro</button>
 <h1 class="titulo">Panel de administracion de postulantes</h1>
 <div
@@ -6,7 +13,7 @@
     <input type="text" id="filtroNombre" placeholder="filtrar por nombre"
         style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:0px; text-align:center;">
     <input type="text" id="filtroApellido" placeholder="Filtrar por apellido"
-        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:850px; text-align:center;">
+        style="font-size:12px; border:2px solid #222; background:#fff; color:#222; padding:4px 0px; border-radius:4px; margin-right:870px; text-align:center;">
 </div>
 
 <table>

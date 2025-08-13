@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesIndex.css') }}" />
 
 </head>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        alert("Aviso: La información ingresada será almacenada en una base de datos simulada exclusivamente con fines de prueba, garantizando la protección y confidencialidad de los datos reales de nuestro cliente.");
+    }, 6000);
+});
+</script>
 
 <body>
     <div id="overlay-confirm"
